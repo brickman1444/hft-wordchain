@@ -202,6 +202,7 @@ window.p = this;
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
     alert( msg.word );
+    this.addPoints( 1 );
   };
 
 
