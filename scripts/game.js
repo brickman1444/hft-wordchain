@@ -94,8 +94,6 @@ window.s = g_services;
   g_services.misc = Misc;
   var g_scoreManager = new ScoreManager(g_services, $("score"));
   g_services.scoreManager = g_scoreManager;
-  var g_wordManager = new WordManager(g_services);
-  g_services.wordManager = g_wordManager;
   var stop = false;
 
   // You can set these from the URL with
@@ -341,6 +339,10 @@ window.g = globals;
     var loaderOptions = {
       imageMappings: globals.debug ? {} : realImageMappings,
     };
+      
+    var g_wordManager = new WordManager(g_services);
+    g_services.wordManager = g_wordManager;
+      
     globals.chosenLevel = chooseLevel(globals.levels, canvas.clientWidth, canvas.clientHeight);
     LevelLoader.load(gl, globals.chosenLevel.url, loaderOptions, function(err, level) {
       if (err) {

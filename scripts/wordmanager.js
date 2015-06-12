@@ -30,14 +30,37 @@
  */
 "use strict";
 
-define( ['hft/misc/misc'],
-       function (Misc) {
+define( [
+        'hft/misc/misc',
+        '../bower_components/hft-utils/dist/imageutils',
+        '../bower_components/hft-utils/dist/spritemanager'],
+       function (
+                 Misc,
+                 ImageUtils,
+                 SpriteManager) {
 
+  var wordFontOptions = {
+    font: "20px sans-serif",
+    yOffset: 18,
+    height: 100,
+    fillStyle: "black",
+  };
+    
   var WordManager = function (services) {
     this.services = services;
     this.currentWord = "Invalid";
       
     this.words = ["turtle", "egg", "box", "cat"];
+      
+    this.currentWordSprite = this.services.spriteManager.createSprite();
+    this.currentWordImage = this.services.createTexture(
+          ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
+      
+    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
+    this.currentWordSprite.x = 50;
+    this.currentWordSprite.y = 50;
+    this.currentWordSprite.width = this.currentWordImage.img.width;
+    this.currentWordSprite.height = this.currentWordImage.img.height;
       
     this.randomizeWord();
   };

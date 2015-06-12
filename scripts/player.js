@@ -454,9 +454,6 @@ window.p = this;
   };
 
   Player.prototype.draw = function() {
-    var globals = this.services.globals;
-    var images = this.services.images;
-    var spriteRenderer = this.services.spriteRenderer;
     var frameNumber = Math.floor(this.animTimer % this.anim.length);
     var img = this.anim[frameNumber];
 
