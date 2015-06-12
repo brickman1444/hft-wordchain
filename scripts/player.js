@@ -205,6 +205,7 @@ window.p = this;
     if ( this.services.wordManager.checkWord( msg.word ) )
     {
         this.addPoints( 1 );
+        this.services.wordManager.randomizeWord();
     }
   };
 

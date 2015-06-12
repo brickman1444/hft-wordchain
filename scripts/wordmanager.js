@@ -30,19 +30,38 @@
  */
 "use strict";
 
-define( function() {
+define( ['hft/misc/misc'],
+       function (Misc) {
 
-  var WordManager = function(services) {
+  var WordManager = function (services) {
     this.services = services;
-    this.currentWord = "Test";
+    this.currentWord = "Invalid";
       
-    this.words = ["turtle","egg","box","cat"]
+    this.words = ["turtle", "egg", "box", "cat"];
+      
+    this.randomizeWord();
+  };
+    
+  WordManager.prototype.randomizeWord = function ()
+  {
+      var randomIndex = Misc.randInt( this.words.length );
+      var newWord = this.words[randomIndex];
+      
+      if ( newWord !== this.currentWord )
+      {
+          this.currentWord = newWord;
+          alert( "The word is " + this.currentWord );
+      }
+      else
+      {
+          this.randomizeWord();  
+      }
   };
     
   WordManager.prototype.checkWord = function( word ) 
   {
-        return word == this.currentWord;   
-  }
+        return word == this.currentWord;
+  };
 
   return WordManager;
 });
