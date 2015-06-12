@@ -30,16 +30,33 @@
  */
 "use strict";
 
-define( ['hft/misc/misc'],
-       function (Misc) {
+define( [
+        'hft/misc/misc',
+        '../bower_components/hft-utils/dist/imageutils',
+        '../bower_components/hft-utils/dist/spritemanager'],
+       function (
+                 Misc,
+                 ImageUtils,
+                 SpriteManager) {
 
+  var wordFontOptions = {
+    font: "40px sans-serif",
+    yOffset: 30,
+    height: 300,
+    fillStyle: "black",
+  };
+    
   var WordManager = function (services) {
     this.services = services;
     this.currentWord = "Invalid";
       
     this.words = ["turtle", "egg", "box", "cat"];
       
+    this.currentWordSprite = this.services.spriteManager.createSprite();
+      
     this.randomizeWord();
+      
+    this.setWordSprite();
   };
     
   WordManager.prototype.randomizeWord = function ()
@@ -50,7 +67,8 @@ define( ['hft/misc/misc'],
       if ( newWord !== this.currentWord )
       {
           this.currentWord = newWord;
-          alert( "The word is " + this.currentWord );
+          //alert( "The word is " + this.currentWord );
+          this.setWordSprite();
       }
       else
       {
@@ -61,6 +79,18 @@ define( ['hft/misc/misc'],
   WordManager.prototype.checkWord = function( word ) 
   {
         return word.toLowerCase() == this.currentWord;
+  };
+    
+  WordManager.prototype.setWordSprite = function()
+  {
+    this.currentWordImage = this.services.createTexture(
+            ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
+      
+    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
+    this.currentWordSprite.x = 500;
+    this.currentWordSprite.y = 250;
+    this.currentWordSprite.width = this.currentWordImage.img.width;
+    this.currentWordSprite.height = this.currentWordImage.img.height;
   };
 
   return WordManager;
