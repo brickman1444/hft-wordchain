@@ -57,8 +57,6 @@ define([
     return function(services, width, height, direction, name, netPlayer) {
       this.services = services;
       this.renderer = services.renderer;
-      services.entitySystem.addEntity(this);
-      services.drawSystem.addEntity(this);
       this.netPlayer = netPlayer;
       this.velocity = [0, 0];
       this.acceleration = [0, 0];
@@ -88,12 +86,7 @@ window.p = this;
       this.scoreLine.ctx.drawImage(
         this.services.images.idle.imgColors[this.color.id][0], 0, 0);
 
-      this.sprite = this.services.spriteManager.createSprite();
-      this.nameSprite = this.services.spriteManager.createSprite();
-
       netPlayer.addEventListener('disconnect', Player.prototype.handleDisconnect.bind(this));
-      netPlayer.addEventListener('move', Player.prototype.handleMoveMsg.bind(this));
-      netPlayer.addEventListener('jump', Player.prototype.handleJumpMsg.bind(this));
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
       netPlayer.addEventListener('busy', Player.prototype.handleBusyMsg.bind(this));
       netPlayer.addEventListener('word choice', Player.prototype.handleWordChoiceMsg.bind(this));
@@ -113,8 +106,6 @@ window.p = this;
   Player.prototype.setName = function(name) {
     if (name != this.playerName) {
       this.playerName = name;
-      this.nameImage = this.services.createTexture(
-          ImageUtils.makeTextImage(name, nameFontOptions));
       this.scoreLine.setName(":" + name);
     }
   };
@@ -169,10 +160,6 @@ window.p = this;
 //  };
 
   Player.prototype.removeFromGame = function() {
-    this.services.spriteManager.deleteSprite(this.sprite);
-    this.services.spriteManager.deleteSprite(this.nameSprite);
-    this.services.entitySystem.removeEntity(this);
-    this.services.drawSystem.removeEntity(this);
     this.services.playerManager.removePlayer(this);
     this.services.scoreManager.deleteScoreLine(this.scoreLine);
     availableColors.push(this.color);
@@ -184,20 +171,6 @@ window.p = this;
 
   Player.prototype.handleBusyMsg = function(msg) {
     // We ignore this message
-  };
-
-  Player.prototype.handleMoveMsg = function(msg) {
-    this.direction = msg.dir;
-    if (this.direction) {
-      this.facing = this.direction;
-    }
-  };
-
-  Player.prototype.handleJumpMsg = function(msg) {
-    this.jump = msg.jump;
-    if (this.jump == 0) {
-      this.jumpTimer = 0;
-    }
   };
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
@@ -451,32 +424,6 @@ window.p = this;
     if (this.jumpTimer >= globals.jumpDuration || !this.jump) {
       this.setState('fall');
     }
-  };
-
-  Player.prototype.draw = function() {
-    var frameNumber = Math.floor(this.animTimer % this.anim.length);
-    var img = this.anim[frameNumber];
-
-    var off = {};
-    this.services.levelManager.getDrawOffset(off);
-
-    var width  = 32;
-    var height = 32;
-
-    var sprite = this.sprite;
-    sprite.uniforms.u_texture = img;
-    sprite.x = (off.x + this.position[0]) | 0;
-    sprite.y = (off.y + height / -2 + this.position[1]) | 0;
-    sprite.width = width;
-    sprite.height = height;
-    sprite.xScale = this.facing > 0 ? 1 : -1;
-
-    var nameSprite = this.nameSprite;
-    nameSprite.uniforms.u_texture = this.nameImage;
-    nameSprite.x = (off.x + this.position[0]) | 0;
-    nameSprite.y = (off.y + height / -2 + this.position[1] - 28) | 0;
-    nameSprite.width = this.nameImage.img.width;
-    nameSprite.height = this.nameImage.img.height;
   };
 
   return Player;
