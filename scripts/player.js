@@ -201,10 +201,12 @@ window.p = this;
   };
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
-    alert( msg.word );
-    this.addPoints( 1 );
+    
+    if ( msg.word == "points" )
+    {
+        this.addPoints( 1 );
+    }
   };
-
 
   Player.prototype.handleNameMsg = function(msg) {
     if (!msg.name) {
