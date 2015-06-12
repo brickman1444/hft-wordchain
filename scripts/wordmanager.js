@@ -35,7 +35,14 @@ define( function() {
   var WordManager = function(services) {
     this.services = services;
     this.currentWord = "Test";
+      
+    this.words = ["turtle","egg","box","cat"]
   };
+    
+  WordManager.prototype.checkWord = function( word ) 
+  {
+        return word == this.currentWord;   
+  }
 
   return WordManager;
 });

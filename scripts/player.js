@@ -202,7 +202,7 @@ window.p = this;
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
     
-    if ( msg.word == "points" )
+    if ( this.services.wordManager.checkWord( msg.word ) )
     {
         this.addPoints( 1 );
     }
