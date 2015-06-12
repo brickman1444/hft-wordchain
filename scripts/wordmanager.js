@@ -40,9 +40,9 @@ define( [
                  SpriteManager) {
 
   var wordFontOptions = {
-    font: "20px sans-serif",
-    yOffset: 18,
-    height: 100,
+    font: "40px sans-serif",
+    yOffset: 30,
+    height: 300,
     fillStyle: "black",
   };
     
@@ -53,16 +53,10 @@ define( [
     this.words = ["turtle", "egg", "box", "cat"];
       
     this.currentWordSprite = this.services.spriteManager.createSprite();
-    this.currentWordImage = this.services.createTexture(
-          ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
-      
-    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
-    this.currentWordSprite.x = 50;
-    this.currentWordSprite.y = 50;
-    this.currentWordSprite.width = this.currentWordImage.img.width;
-    this.currentWordSprite.height = this.currentWordImage.img.height;
       
     this.randomizeWord();
+      
+    this.setWordSprite();
   };
     
   WordManager.prototype.randomizeWord = function ()
@@ -73,7 +67,8 @@ define( [
       if ( newWord !== this.currentWord )
       {
           this.currentWord = newWord;
-          alert( "The word is " + this.currentWord );
+          //alert( "The word is " + this.currentWord );
+          this.setWordSprite();
       }
       else
       {
@@ -84,6 +79,18 @@ define( [
   WordManager.prototype.checkWord = function( word ) 
   {
         return word.toLowerCase() == this.currentWord;
+  };
+    
+  WordManager.prototype.setWordSprite = function()
+  {
+    this.currentWordImage = this.services.createTexture(
+            ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
+      
+    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
+    this.currentWordSprite.x = 500;
+    this.currentWordSprite.y = 250;
+    this.currentWordSprite.width = this.currentWordImage.img.width;
+    this.currentWordSprite.height = this.currentWordImage.img.height;
   };
 
   return WordManager;
