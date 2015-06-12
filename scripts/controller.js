@@ -173,6 +173,7 @@ requirejs(
       g_client.sendCmd('word choice', {
             word: wordInput.value,
         });
+      wordInput.value = "";
   }
   
     function inputChange()

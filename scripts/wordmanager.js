@@ -60,7 +60,7 @@ define( ['hft/misc/misc'],
     
   WordManager.prototype.checkWord = function( word ) 
   {
-        return word == this.currentWord;
+        return word.toLowerCase() == this.currentWord;
   };
 
   return WordManager;
