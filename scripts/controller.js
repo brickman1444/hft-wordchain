@@ -62,7 +62,7 @@ requirejs(
 
   var globals = {
     debug: false,
-    orientation: "landscape-primary",
+    orientation: "portrait-primary",
   };
   Misc.applyUrlSettings(globals);
   MobileHacks.fixHeightHack();
