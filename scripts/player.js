@@ -96,6 +96,7 @@ window.p = this;
       netPlayer.addEventListener('jump', Player.prototype.handleJumpMsg.bind(this));
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
       netPlayer.addEventListener('busy', Player.prototype.handleBusyMsg.bind(this));
+      netPlayer.addEventListener('word choice', Player.prototype.handleWordChoiceMsg.bind(this));
 
       this.setName(name);
       this.direction = 0;         // direction player is pushing (-1, 0, 1)
@@ -198,6 +199,11 @@ window.p = this;
       this.jumpTimer = 0;
     }
   };
+    
+  Player.prototype.handleWordChoiceMsg = function(msg) {
+    alert( msg.word );
+  };
+
 
   Player.prototype.handleNameMsg = function(msg) {
     if (!msg.name) {

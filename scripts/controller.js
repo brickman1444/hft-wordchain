@@ -164,17 +164,20 @@ requirejs(
   
   function formSubmit()
   {
-	  alert("form submit")
+	  //alert("form submit")
   }
   
   function inputSubmit()
   {
-	  alert(wordInput.value)
+	  //alert(wordInput.value)
+      g_client.sendCmd('word choice', {
+            word: wordInput.value,
+        });
   }
   
     function inputChange()
   {
-	  alert("input change")
+	  //alert("input change")
   }
 
   ImageLoader.loadImages(images, startClient);
