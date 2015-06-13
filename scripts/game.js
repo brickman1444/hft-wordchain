@@ -374,9 +374,6 @@ window.g = globals;
       g_services.playerManager.forEachPlayer(function(player) {
         player.reset();
       });
-      if (globals.coin) {
-        globals.coin.reset();
-      }
     };
 
     function startGame() {
@@ -392,7 +389,6 @@ window.g = globals;
       }
 
       g_services.particleEffectManager = new ParticleEffectManager(g_services);
-      globals.coin = new Collectable(g_services);
 
       var server;
       if (globals.haveServer) {
