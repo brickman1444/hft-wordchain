@@ -234,8 +234,6 @@ window.g = globals;
     idle:  { url: "assets/spr_idle.png",  colorize: 32, scale: 2, slices: 16, },
     move:  { url: "assets/spr_run.png",   colorize: 32, scale: 2, slices: 16, },
     jump:  { url: "assets/spr_jump.png",  colorize: 32, scale: 2, slices: [16, 17, 17, 18, 16, 16] },
-//    brick: { url: "assets/bricks.png",    colorize:  1, scale: 2, slices: 48, },
-    coin:  { url: "assets/coin_anim.png", colorize:  1, scale: 4, slices: 8, },
   };
   var colors = [];
   g_services.images = images;
@@ -369,23 +367,7 @@ window.g = globals;
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.SCISSOR_TEST);
     gl.disable(gl.BLEND);
-
-
-    var layerNdx = 0;
-    var layers    = globals.level.layers;
-    var numLayers = layers.length;
-    if (globals.playLevel) {
-      // Draw all layers before and including playLevel
-      for (; layerNdx < numLayers && layer !== globals.playLevel; ++layerNdx) {
-        var layer = layers[layerNdx];
-        if (layer === globals.playLevel) {
-          g_services.particleSystemManager.drawParticleSystemBehindLevel(globals.drawOffset);
-          gl.disable(gl.BLEND);
-        }
-        layer.draw(g_services.levelManager, globals);
-      }
-    }
-    g_services.particleSystemManager.drawParticleSystemBehindPlayer(globals.drawOffset);
+      
     g_services.drawSystem.processEntities();
 
     gl.enable(gl.BLEND);
@@ -393,16 +375,6 @@ window.g = globals;
     gl.blendEquation(gl.FUNC_ADD);
     g_services.spriteManager.draw();
     gl.disable(gl.BLEND);
-
-    if (globals.playLevel) {
-      // Draw the remaining layers
-      for(; layerNdx < numLayers; ++layerNdx) {
-        var layer = layers[layerNdx];
-        layer.draw(g_services.levelManager, globals);
-      }
-    }
-    g_services.particleSystemManager.drawParticleSystemInFrontOfPlayer(globals.drawOffset);
-
 
     g_services.scoreManager.update();
   };
