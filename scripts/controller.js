@@ -114,39 +114,6 @@ requirejs(
 
     CommonUI.setupStandardControllerUI(g_client, globals);
 
-    var handleLeftRight = function(pressed, bit) {
-      g_leftRight = (g_leftRight & ~bit) | (pressed ? bit : 0);
-      if (g_leftRight != g_oldLeftRight) {
-        g_oldLeftRight = g_leftRight;
-        g_client.sendCmd('move', {
-            dir: (g_leftRight & 1) ? -1 : ((g_leftRight & 2) ? 1 : 0),
-        });
-      }
-    };
-
-    var handleJump = function(pressed) {
-      if (g_jump != pressed) {
-        g_jump = pressed;
-        g_client.sendCmd('jump', {
-            jump: pressed,
-        });
-      }
-    };
-
-    var keys = { };
-    keys[Input.cursorKeys.kLeft]  = function(e) { handleLeftRight(e.pressed, 0x1); }
-    keys[Input.cursorKeys.kRight] = function(e) { handleLeftRight(e.pressed, 0x2); }
-    keys["Z".charCodeAt(0)]       = function(e) { handleJump(e.pressed);           }
-    Input.setupKeys(keys);
-
-    Touch.setupButtons({
-      inputElement: $("buttons"),
-      buttons: [
-        { element: $("left"),  callback: function(e) { handleLeftRight(e.pressed, 0x1); }, },
-        { element: $("right"), callback: function(e) { handleLeftRight(e.pressed, 0x2); }, },
-        { element: $("up"),    callback: function(e) { handleJump(e.pressed);           }, },
-      ],
-    });
   };
 
   var images = {
