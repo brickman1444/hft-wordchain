@@ -48,9 +48,7 @@ requirejs(
     '../bower_components/hft-utils/dist/entitysystem',
     '../bower_components/hft-utils/dist/imageloader',
     '../bower_components/hft-utils/dist/imageutils',
-    '../bower_components/hft-utils/dist/levelloader',
     '../bower_components/hft-utils/dist/spritemanager',
-    './level',
     './particleeffectmanager',
     './particlesystemmanager',
     './playermanager',
@@ -69,9 +67,7 @@ requirejs(
     EntitySystem,
     ImageLoader,
     ImageUtils,
-    LevelLoader,
     SpriteManager,
-    Level,
     ParticleEffectManager,
     ParticleSystemManager,
     PlayerManager,
@@ -115,9 +111,6 @@ window.s = g_services;
     fallTopAnimVelocity: 100,
     drawOffset: {},
     scale: 1,
-    levels: [
-      { width: 30, height: 15, url: "assets/levels/level30x15.json", },
-    ],
   };
 window.g = globals;
 
@@ -157,10 +150,7 @@ window.g = globals;
 
   var resize = function() {
     if (Misc.resize(canvas)) {
-      var level = globals.levels[0];
-      if (level !== globals.chosenLevel) {
-        window.location.reload();
-      }
+
     }
   };
   g_services.globals = globals;
@@ -232,38 +222,14 @@ window.g = globals;
       
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;
-      
-    globals.chosenLevel = globals.levels[0];
-    LevelLoader.load(gl, globals.chosenLevel.url, loaderOptions, function(err, level) {
-      if (err) {
-        throw err;
-      }
-      level.layers = level.layers.map(function(layer) {
-        return new Level(layer);
-      });
-      globals.level = level;
-
-      // Figure out which level is the play one.
-      var playLevel;
-      globals.level.layers.forEach(function(layer) {
-        if (layer.name == "Tile Layer 1" ||
-            Strings.startsWith(layer.name.toLowerCase(), "play")) {
-          playLevel = layer;
-        }
-      });
-      if (!playLevel) {
-        playLevel = globals.level.layers[globals.level.layers.length / 2 | 0];
-      }
-      globals.playLevel = playLevel;
-
-      startGame();
-    });
 
     var resetGame = function() {
       g_services.playerManager.forEachPlayer(function(player) {
         player.reset();
       });
     };
+      
+    startGame();
 
     function startGame() {
 
