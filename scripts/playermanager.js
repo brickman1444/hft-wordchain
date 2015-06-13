@@ -38,11 +38,7 @@ define(['./player'], function(Player) {
   };
 
   PlayerManager.prototype.startPlayer = function(netPlayer, name) {
-    var misc = this.services.misc;
-    var levelManager = this.services.levelManager;
-    var level = levelManager.getLevel();
-    var direction = misc.randInt(2) ? -1 : 1;
-    var player = new Player(this.services, level.tileWidth, level.tileHeight, direction, name, netPlayer);
+    var player = new Player(this.services, name, netPlayer);
     this.players.push(player);
     return player;
   }

@@ -54,7 +54,7 @@ define([
    * @constructor
    */
   var Player = (function() {
-    return function(services, width, height, direction, name, netPlayer) {
+    return function(services, name, netPlayer) {
       this.services = services;
       this.renderer = services.renderer;
       this.netPlayer = netPlayer;
@@ -95,11 +95,7 @@ define([
   };
 
   Player.prototype.reset = function() {
-    var levelManager = this.services.levelManager;
-    var level = levelManager.getLevel();
-    var position = levelManager.getRandomOpenPosition();
-    this.position = [position.x, position.y];
-    this.lastPosition = [this.position[0], this.position[1]];
+
   };
 
   Player.prototype.addPoints = function(points) {
