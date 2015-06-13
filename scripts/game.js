@@ -118,10 +118,7 @@ window.s = g_services;
     drawOffset: {},
     scale: 1,
     levels: [
-      { width: 10, height: 15, url: "assets/levels/level10x15.json", },
-      { width: 20, height: 10, url: "assets/levels/level20x10.json", },
       { width: 30, height: 15, url: "assets/levels/level30x15.json", },
-      { width: 40, height: 20, url: "assets/levels/level40x20.json", },
     ],
   };
 window.g = globals;
@@ -160,28 +157,9 @@ window.g = globals;
   g_services.spriteManager = new SpriteManager();
   g_services.particleSystemManager = new ParticleSystemManager(2);
 
-  var chooseLevel = function(levels, maxWidth, maxHeight) {
-    // pick the largest level that fits
-    var largestLevel = levels[0];
-    var largestSize = 0;
-    levels.forEach(function(level) {
-      var hSpace = maxWidth  - level.width  * 32;
-      var vSpace = maxHeight - level.height * 32;
-      if (hSpace >= 0 && vSpace >= 0) {
-        var size = level.width * level.height;
-        if (size > largestSize) {
-          largestSize = size;
-          largestLevel = level;
-        }
-      }
-    });
-    return largestLevel;
-  };
-
-
   var resize = function() {
     if (Misc.resize(canvas)) {
-      var level = chooseLevel(globals.levels, canvas.clientWidth, canvas.clientHeight);
+      var level = globals.levels[0];
       if (level !== globals.chosenLevel) {
         window.location.reload();
       }
@@ -257,7 +235,7 @@ window.g = globals;
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;
       
-    globals.chosenLevel = chooseLevel(globals.levels, canvas.clientWidth, canvas.clientHeight);
+    globals.chosenLevel = globals.levels[0];
     LevelLoader.load(gl, globals.chosenLevel.url, loaderOptions, function(err, level) {
       if (err) {
         throw err;
