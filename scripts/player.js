@@ -58,8 +58,6 @@ define([
       this.services = services;
       this.renderer = services.renderer;
       this.netPlayer = netPlayer;
-      this.velocity = [0, 0];
-      this.acceleration = [0, 0];
       if (availableColors.length == 0) {
         var colors = services.colors;
         for (var ii = 0; ii < colors.length; ++ii) {
@@ -72,15 +70,6 @@ window.p = this;
       netPlayer.sendCmd('setColor', this.color);
       availableColors.splice(colorNdx, 1);
       this.color.id;
-      this.animTimer = 0;
-      this.width = width;
-      this.height = height;
-      this.canJump = false;
-      this.checkWallOffset = [
-        -this.width / 2,
-        this.width / 2 - 1,
-      ];
-      this.timeAccumulator = 0;
 
       this.scoreLine = this.services.scoreManager.createScoreLine(this, this.color);
       this.scoreLine.ctx.drawImage(
@@ -92,13 +81,10 @@ window.p = this;
       netPlayer.addEventListener('word choice', Player.prototype.handleWordChoiceMsg.bind(this));
 
       this.setName(name);
-      this.direction = 0;         // direction player is pushing (-1, 0, 1)
-      this.facing = direction;    // direction player is facing (-1, 1)
       this.score = 0;
       this.addPoints(0);
 
       this.reset();
-      this.checkBounds();
     };
   }());
 
