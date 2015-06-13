@@ -38,7 +38,7 @@ define(['./player'], function(Player) {
   };
 
   PlayerManager.prototype.startPlayer = function(netPlayer, name) {
-    var player = new Player(this.services, direction, name, netPlayer);
+    var player = new Player(this.services, name, netPlayer);
     this.players.push(player);
     return player;
   }

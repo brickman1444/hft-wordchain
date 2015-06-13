@@ -297,22 +297,19 @@ window.g = globals;
 
   var mainloop = function() {
     resize();
-    g_services.levelManager.getDrawOffset(globals.drawOffset);
     g_services.entitySystem.processEntities();
 
+    var levelWidth = 960;
+    var levelHeight = 480;
+      
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.clearColor(0.15, 0.15, 0.15, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
-    var level = g_services.levelManager.getLevel();
-    var xtraX = ((gl.canvas.width  - level.levelWidth ) / 2 | 0);
-    var xtraY = ((gl.canvas.height - level.levelHeight) / 2 | 0);
-    gl.scissor(xtraX, xtraY, level.levelWidth, level.levelHeight);
+    var xtraX = ((gl.canvas.width  - levelWidth) / 2 | 0);
+    var xtraY = ((gl.canvas.height - levelHeight) / 2 | 0);
+    gl.scissor(xtraX, xtraY, levelWidth, levelHeight);
     gl.enable(gl.SCISSOR_TEST);
-    gl.clearColor(
-        globals.level.backgroundColor[0],
-        globals.level.backgroundColor[1],
-        globals.level.backgroundColor[2],
-        globals.level.backgroundColor[3]);
+    gl.clearColor(0.5, 0.5, 0.5, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.SCISSOR_TEST);
     gl.disable(gl.BLEND);
