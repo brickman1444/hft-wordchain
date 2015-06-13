@@ -71,7 +71,7 @@ define( [
       if ( newWord !== this.currentWord )
       {
           this.currentWord = newWord;
-          //alert( "The word is " + this.currentWord );
+          this.letters = 0;
           this.setWordSprite();
       }
       else
@@ -82,7 +82,7 @@ define( [
     
   WordManager.prototype.checkWord = function( word ) 
   {
-      if (word.toLowerCase() == this.currentWord)
+      if (word.toLowerCase() == this.currentWord.toLowerCase())
       {
         return true;   
       }
@@ -94,9 +94,24 @@ define( [
       }
   };
     
+  WordManager.prototype.makeDisplayWord = function(word,letters)
+  {
+    var upperCaseWord = word.toUpperCase();
+    var displayString = upperCaseWord.substring(0, this.letters) + blanksString.substring(0,upperCaseWord.length - this.letters);
+    
+    var spacedString = "";
+      
+    for ( var i = 0; i < displayString.length; i++ )
+    {
+        spacedString += displayString.charAt(i) + " ";
+    }
+      
+    return spacedString;
+  }
+    
   WordManager.prototype.setWordSprite = function()
   {      
-    this.displayString = this.currentWord.substring(this.blanks, this.letters) + blanksString.substring(0,this.currentWord.length - this.letters);
+    this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
       
     this.currentWordImage = this.services.createTexture(
             ImageUtils.makeTextImage(this.displayString, wordFontOptions));
