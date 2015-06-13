@@ -50,7 +50,6 @@ requirejs(
     '../bower_components/hft-utils/dist/imageutils',
     '../bower_components/hft-utils/dist/levelloader',
     '../bower_components/hft-utils/dist/spritemanager',
-    './collectable',
     './level',
     './levelmanager',
     './particleeffectmanager',
@@ -73,7 +72,6 @@ requirejs(
     ImageUtils,
     LevelLoader,
     SpriteManager,
-    Collectable,
     Level,
     LevelManager,
     ParticleEffectManager,
@@ -153,59 +151,6 @@ window.g = globals;
       addLocalPlayer();
     }
 
-    var handleLeftRight = function(playerId, pressed, bit) {
-      var localPlayer = localPlayers[playerId];
-      if (localPlayer) {
-        localPlayer.leftRight = (localPlayer.leftRight & ~bit) | (pressed ? bit : 0);
-        if (localPlayer.leftRight != localPlayer.oldLeftRight) {
-          localPlayer.oldLeftRight = localPlayer.leftRight;
-          localPlayer.netPlayer.sendEvent('move', {
-              dir: (localPlayer.leftRight & 1) ? -1 : ((localPlayer.leftRight & 2) ? 1 : 0),
-          });
-        }
-      }
-    };
-
-    var handleJump = function(playerId, pressed) {
-      var localPlayer = localPlayers[playerId];
-      if (localPlayer) {
-        if (localPlayer.jump != pressed) {
-          localPlayer.jump = pressed;
-          localPlayer.netPlayer.sendEvent('jump', {
-              jump: pressed,
-          });
-        }
-      }
-    };
-
-    var handleTestSound = (function() {
-      var soundNdx = 0;
-      var soundIds;
-
-      return function(pressed) {
-        if (!soundIds) {
-          soundIds = g_services.audioManager.getSoundIds();
-        }
-        if (pressed) {
-          var id = soundIds[soundNdx];
-          console.log("play: " + id);
-          g_services.audioManager.playSound(id);
-          soundNdx = (soundNdx + 1) % soundIds.length;
-        }
-      };
-    }());
-
-    var keys = { };
-    keys[Input.cursorKeys.kLeft]  = function(e) { handleLeftRight(0, e.pressed, 0x1); }
-    keys[Input.cursorKeys.kRight] = function(e) { handleLeftRight(0, e.pressed, 0x2); }
-    keys["Z"]                     = function(e) { handleJump(0, e.pressed);           }
-    keys["A"]                     = function(e) { handleLeftRight(1, e.pressed, 0x1); }
-    keys["D"]                     = function(e) { handleLeftRight(1, e.pressed, 0x2); }
-    keys["W"]                     = function(e) { handleJump(1, e.pressed);           }
-    keys["X"]                     = function(e) { handleTestSound(e.pressed);         }
-    keys[187]                     = function(e) { addLocalPlayer();                   }
-    keys[189]                     = function(e) { removeLocalPlayer(2);               }
-    Input.setupKeys(keys);
   }
 
   Misc.applyUrlSettings(globals);
@@ -374,9 +319,6 @@ window.g = globals;
       g_services.playerManager.forEachPlayer(function(player) {
         player.reset();
       });
-      if (globals.coin) {
-        globals.coin.reset();
-      }
     };
 
     function startGame() {
@@ -392,7 +334,6 @@ window.g = globals;
       }
 
       g_services.particleEffectManager = new ParticleEffectManager(g_services);
-      globals.coin = new Collectable(g_services);
 
       var server;
       if (globals.haveServer) {
