@@ -189,35 +189,6 @@ window.g = globals;
   };
   g_services.globals = globals;
 
-  if (globals.tileInspector) {
-    var element = document.createElement("div");
-    var s = element.style;
-    s.zIndex = 20000;
-    s.position = "absolute";
-    s.backgroundColor = "rgba(0,0,0,0.6)";
-    s.padding = "1em";
-    s.color = "white";
-    s.pointerEvents = "none";
-    document.body.appendChild(element);
-    $("outer").addEventListener('mousemove', function(e) {
-      var pos = Input.getRelativeCoordinates(e.target, e);
-      var level = g_levelManager.getLevel();
-      var offset = level.getTransformOffset(levelCtx);
-      var x = pos.x - offset.x;
-      var y = pos.y - offset.y;
-      var tileId = level.getTileByPixel(x, y);
-      var tileInfo = g_levelManager.getTileInfo(tileId);
-      var px = (canvas.clientLeft + pos.x) + "px";
-      var py = (canvas.clientTop  + pos.y) + "px";
-      s.left = px;
-      s.top  = py;
-      element.innerHTML = "<pre>" +
-        "x: " + x + "\n" +
-        "y: " + y + "\n" +
-        "tileId:" + tileId + " (" + String.fromCharCode(tileId) + ")";
-    }, false);
-  };
-
   var createTexture = function(img) {
     var tex = Textures.loadTexture(img);
     tex.setParameter(gl.TEXTURE_MIN_FILTER, gl.NEAREST);
