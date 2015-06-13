@@ -66,14 +66,13 @@ define([
       }
       var colorNdx = Math.floor(Math.random() * availableColors.length);
       this.color = availableColors[colorNdx];
-window.p = this;
+      window.p = this;
       netPlayer.sendCmd('setColor', this.color);
       availableColors.splice(colorNdx, 1);
       this.color.id;
 
       this.scoreLine = this.services.scoreManager.createScoreLine(this, this.color);
-      this.scoreLine.ctx.drawImage(
-        this.services.images.idle.imgColors[this.color.id][0], 0, 0);
+      this.scoreLine.ctx.drawImage(this.services.images.idle.imgColors[this.color.id][0], 0, 0);
 
       netPlayer.addEventListener('disconnect', Player.prototype.handleDisconnect.bind(this));
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
@@ -147,4 +146,3 @@ window.p = this;
 
   return Player;
 });
-
