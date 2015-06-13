@@ -43,12 +43,16 @@ define( [
     font: "40px sans-serif",
     yOffset: 30,
     height: 300,
-    fillStyle: "black",
+    fillStyle: "white",
   };
+    
+  var blanksString = "______________";
     
   var WordManager = function (services) {
     this.services = services;
     this.currentWord = "Invalid";
+    this.displayString = "";
+    this.letters = 0;
       
     this.words = ["turtle", "egg", "box", "cat"];
       
@@ -78,13 +82,24 @@ define( [
     
   WordManager.prototype.checkWord = function( word ) 
   {
-        return word.toLowerCase() == this.currentWord;
+      if (word.toLowerCase() == this.currentWord)
+      {
+        return true;   
+      }
+      else
+      {
+        this.letters++;
+        this.setWordSprite();
+          return false;
+      }
   };
     
   WordManager.prototype.setWordSprite = function()
-  {
+  {      
+    this.displayString = this.currentWord.substring(this.blanks, this.letters) + blanksString.substring(0,this.currentWord.length - this.letters);
+      
     this.currentWordImage = this.services.createTexture(
-            ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
+            ImageUtils.makeTextImage(this.displayString, wordFontOptions));
       
     this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
     this.currentWordSprite.x = 500;
