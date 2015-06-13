@@ -51,7 +51,6 @@ requirejs(
     '../bower_components/hft-utils/dist/levelloader',
     '../bower_components/hft-utils/dist/spritemanager',
     './level',
-    './levelmanager',
     './particleeffectmanager',
     './particlesystemmanager',
     './playermanager',
@@ -73,7 +72,6 @@ requirejs(
     LevelLoader,
     SpriteManager,
     Level,
-    LevelManager,
     ParticleEffectManager,
     ParticleSystemManager,
     PlayerManager,
@@ -262,15 +260,12 @@ window.g = globals;
     });
 
     var resetGame = function() {
-      g_services.levelManager.reset(canvas.width, canvas.height, globals.playLevel);
       g_services.playerManager.forEachPlayer(function(player) {
         player.reset();
       });
     };
 
     function startGame() {
-      var g_levelManager = new LevelManager(g_services);
-      g_services.levelManager = g_levelManager;
 
       resetGame();
       resize();

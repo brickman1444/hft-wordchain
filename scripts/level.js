@@ -123,49 +123,6 @@ define([
     this.isSetup = false;
   };
 
-  Level.prototype.setup = function(levelManager) {
-    if (this.isSetup) {
-      return;
-    }
-    this.isSetup = true;
-    // find stuff
-    for (var yy = 0; yy < this.height; ++yy) {
-      for (var xx = 0; xx < this.width; ++xx) {
-        var tileId = this.getTile(xx, yy);
-        var info = levelManager.getTileInfo(tileId);
-        if (info.thing) {
-          var things = this.things[info.thing];
-          if (!things) {
-            things = {};
-            this.things[info.thing] = things;
-          };
-          var instances = things[info.id];
-          if (!instances) {
-            instances = [];
-            things[info.id] = instances;
-          }
-          instances.push({ tx: xx, ty: yy, tileInfo: info });
-        }
-        var teleportDest = info.teleportDest;
-        if (teleportDest !== undefined) {
-          var destMap = info.local ? this.localDests : this.dests;
-          var dests = destMap[teleportDest];
-          if (!dests) {
-            dests = {};
-            destMap[teleportDest] = dests;
-          }
-          var subDest = info.subDest || 0;
-          var subDests = dests[subDest];
-          if (!subDests) {
-            subDests = [];
-            dests[subDest] = subDests;
-          }
-          subDests.push({tx: xx, ty: yy});
-        }
-      }
-    }
-  };
-
   Level.prototype.getThings = function(thing) {
     return this.things[thing];
   };
@@ -209,7 +166,7 @@ define([
     this.dirty = true;
   };
 
-  Level.prototype.draw = function(levelManager, options) {
+  Level.prototype.draw = function(options) {
     if (this.dirty) {
       this.tilemap.uploadTilemap();
       this.dirty = false;
