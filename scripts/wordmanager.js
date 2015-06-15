@@ -103,6 +103,12 @@ define( [
       else
       {
         this.letters++;
+          
+        if ( this.letters >= this.currentWord.length )
+        {
+           this.letters = this.currentWord.length - 1;   
+        }
+          
         this.setWordSprite();
           return false;
       }
