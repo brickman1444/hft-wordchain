@@ -55,7 +55,7 @@ define( [
   var WordManager = function (services) {
     this.services = services;
     this.displayString = "";
-    this.letters = 0;
+    this.letters = 1;
       
     this.wordList = sampleWordList;
     this.currentWordIndex = 0;
@@ -99,7 +99,8 @@ define( [
       //if ( newWord !== this.currentWord )
       //{
           this.wordList = sampleWordList;
-          this.letters = 0;
+          this.currentWordIndex = 0;
+          this.letters = 1;
           this.setWordSprites();
       //}
       //else
@@ -178,6 +179,20 @@ define( [
         this.wordSprites[index].y = this.yOrigin + this.yStride * index;
         this.wordSprites[index].width = wordImage.img.width;
         this.wordSprites[index].height = wordImage.img.height;  
+  }
+  
+  WordManager.prototype.advanceWordIndex = function()
+  {
+    this.currentWordIndex++;
+      
+    if ( this.currentWordIndex >= this.wordList.length )
+    {
+        this.randomizeWordList();
+    }
+      
+    this.currentWord = this.wordList[this.currentWordIndex];
+    this.letters = 1;
+    this.setWordSprites();
   }
 
   return WordManager;
