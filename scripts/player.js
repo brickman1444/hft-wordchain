@@ -121,7 +121,7 @@ define([
     
     if ( this.services.wordManager.checkWord( msg.word ) )
     {
-        this.addPoints( 1 );
+        this.addPoints( this.services.wordManager.getNumBlanks() );
         this.services.wordManager.randomizeWord();
     }
   };

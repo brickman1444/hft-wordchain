@@ -63,6 +63,20 @@ define( [
     this.setWordSprite();
   };
     
+  WordManager.prototype.getNumBlanks = function()
+  {
+      var numBlanks = this.currentWord.length - this.letters;
+      
+      if ( numBlanks < 0 )
+      {
+        return 0;   
+      }
+      else
+      {
+       return numBlanks;   
+      }
+  }
+    
   WordManager.prototype.randomizeWord = function ()
   {
       var randomIndex = Misc.randInt( this.words.length );
