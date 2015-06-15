@@ -33,11 +33,13 @@
 define( [
         'hft/misc/misc',
         '../bower_components/hft-utils/dist/imageutils',
-        '../bower_components/hft-utils/dist/spritemanager'],
+        '../bower_components/hft-utils/dist/spritemanager',
+        '../bower_components/hft-utils/dist/io'],
        function (
                  Misc,
                  ImageUtils,
-                 SpriteManager) {
+                 SpriteManager,
+                 IO) {
 
   var wordFontOptions = {
     font: "40px sans-serif",
@@ -48,7 +50,7 @@ define( [
     
   var blanksString = "______________";
     
-  var sampleWordList = [ "Hold", "Fast", "Food", "Truck", "Stop", "Light"];
+  var wordListURL = "assets/wordLists.json";
     
   var wordListLength = 6;
     
@@ -56,10 +58,6 @@ define( [
     this.services = services;
     this.displayString = "";
     this.letters = 1;
-      
-    this.wordList = sampleWordList;
-    this.currentWordIndex = 0;
-    this.currentWord = this.wordList[this.currentWordIndex];
       
     this.wordSprites = [];
       
@@ -72,10 +70,32 @@ define( [
     this.yOrigin = 250;
     this.yStride = 50;
       
-    this.randomizeWordList();
-      
-    this.setWordSprites();
+    this.setupWordLists();
   };
+    
+  WordManager.prototype.setupWordLists = function()
+  {
+      var that = this;
+      
+      var onLoad = function(err, wordListsObject)
+      {
+          if (err)
+          {
+           throw err;   
+          }
+          
+          that.wordList = wordListsObject.wordList;
+          
+          that.currentWordIndex = 0;
+          that.currentWord = that.wordList[that.currentWordIndex];
+          
+          that.randomizeWordList();
+      };
+      
+      var options = { method: 'GET', };
+      
+      IO.sendJSON( wordListURL, {}, onLoad, options );
+  }
     
   WordManager.prototype.getNumBlanks = function()
   {
@@ -98,7 +118,7 @@ define( [
       
       //if ( newWord !== this.currentWord )
       //{
-          this.wordList = sampleWordList;
+          //this.wordList = sampleWordList;
           this.currentWordIndex = 0;
           this.letters = 1;
           this.setWordSprites();
