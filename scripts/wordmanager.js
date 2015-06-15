@@ -58,7 +58,8 @@ define( [
     this.letters = 0;
       
     this.wordList = sampleWordList;
-    this.currentWord = this.wordList[0];
+    this.currentWordIndex = 0;
+    this.currentWord = this.wordList[this.currentWordIndex];
       
     this.wordSprites = [];
       
@@ -66,6 +67,10 @@ define( [
     {
       this.wordSprites[i] = this.services.spriteManager.createSprite();
     }
+      
+    this.xOrigin = 500;
+    this.yOrigin = 250;
+    this.yStride = 50;
       
     this.randomizeWordList();
       
@@ -126,7 +131,7 @@ define( [
   WordManager.prototype.makeDisplayWord = function(word,letters)
   {
     var upperCaseWord = word.toUpperCase();
-    var displayString = upperCaseWord.substring(0, this.letters) + blanksString.substring(0,upperCaseWord.length - this.letters);
+    var displayString = upperCaseWord.substring(0, letters) + blanksString.substring(0,upperCaseWord.length - letters);
     
     var spacedString = "";
       
@@ -139,25 +144,41 @@ define( [
   }
     
   WordManager.prototype.setWordSprites = function()
-  {            
-      var xOrigin = 500;
-      var yOrigin = 250;
-      var yStride = 50;
-      
-      for ( var i = 0; i < this.wordList.length; i++ )
+  {          
+      // Before current word
+      for ( var i = 0; i < this.currentWordIndex; i++ )
       {
-         this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
+         this.displayString = this.makeDisplayWord( this.wordList[i], 100);
       
-         var wordImage = this.services.createTexture(
-            ImageUtils.makeTextImage(this.displayString, wordFontOptions));
+         this.makeSprite( i, this.displayString );
+      }
       
-        this.wordSprites[i].uniforms.u_texture = wordImage;
-        this.wordSprites[i].x = xOrigin;
-        this.wordSprites[i].y = yOrigin + yStride * i;
-        this.wordSprites[i].width = wordImage.img.width;
-        this.wordSprites[i].height = wordImage.img.height;  
+      //Current word
+      this.displayString = this.makeDisplayWord( this.wordList[this.currentWordIndex], this.letters);
+      
+      this.makeSprite( this.currentWordIndex, this.displayString );
+     
+      
+      //After current word
+      for ( var i = this.currentWordIndex + 1; i < this.wordList.length; i++ )
+      {
+         this.displayString = this.makeDisplayWord( this.wordList[i], 0);
+      
+         this.makeSprite( i, this.displayString );
       }
   };
+    
+  WordManager.prototype.makeSprite = function( index, wordString )
+  {
+        var wordImage = this.services.createTexture(
+            ImageUtils.makeTextImage(wordString, wordFontOptions));
+      
+        this.wordSprites[index].uniforms.u_texture = wordImage;
+        this.wordSprites[index].x = this.xOrigin;
+        this.wordSprites[index].y = this.yOrigin + this.yStride * index;
+        this.wordSprites[index].width = wordImage.img.width;
+        this.wordSprites[index].height = wordImage.img.height;  
+  }
 
   return WordManager;
 });
