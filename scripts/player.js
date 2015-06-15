@@ -122,7 +122,7 @@ define([
     if ( this.services.wordManager.checkWord( msg.word ) )
     {
         this.addPoints( this.services.wordManager.getNumBlanks() );
-        this.services.wordManager.randomizeWord();
+        this.services.wordManager.randomizeWordList();
     }
   };
 

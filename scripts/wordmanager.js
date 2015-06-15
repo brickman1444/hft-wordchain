@@ -48,19 +48,28 @@ define( [
     
   var blanksString = "______________";
     
+  var sampleWordList = [ "Hold", "Fast", "Food", "Truck", "Stop", "Light"];
+    
+  var wordListLength = 6;
+    
   var WordManager = function (services) {
     this.services = services;
-    this.currentWord = "Invalid";
     this.displayString = "";
     this.letters = 0;
       
-    this.words = ["turtle", "egg", "box", "cat"];
+    this.wordList = sampleWordList;
+    this.currentWord = this.wordList[0];
       
-    this.currentWordSprite = this.services.spriteManager.createSprite();
+    this.wordSprites = [];
       
-    this.randomizeWord();
+    for ( var i = 0; i < wordListLength; i++ )
+    {
+      this.wordSprites[i] = this.services.spriteManager.createSprite();
+    }
       
-    this.setWordSprite();
+    this.randomizeWordList();
+      
+    this.setWordSprites();
   };
     
   WordManager.prototype.getNumBlanks = function()
@@ -77,21 +86,21 @@ define( [
       }
   }
     
-  WordManager.prototype.randomizeWord = function ()
+  WordManager.prototype.randomizeWordList = function ()
   {
-      var randomIndex = Misc.randInt( this.words.length );
-      var newWord = this.words[randomIndex];
+      //var randomIndex = Misc.randInt( this.words.length );
+      //var newWord = this.words[randomIndex];
       
-      if ( newWord !== this.currentWord )
-      {
-          this.currentWord = newWord;
+      //if ( newWord !== this.currentWord )
+      //{
+          this.wordList = sampleWordList;
           this.letters = 0;
-          this.setWordSprite();
-      }
-      else
-      {
-          this.randomizeWord();  
-      }
+          this.setWordSprites();
+      //}
+      //else
+      //{
+    //      this.randomizeWord();  
+      //}
   };
     
   WordManager.prototype.checkWord = function( word ) 
@@ -109,7 +118,7 @@ define( [
            this.letters = this.currentWord.length - 1;   
         }
           
-        this.setWordSprite();
+        this.setWordSprites();
           return false;
       }
   };
@@ -129,18 +138,25 @@ define( [
     return spacedString;
   }
     
-  WordManager.prototype.setWordSprite = function()
-  {      
-    this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
+  WordManager.prototype.setWordSprites = function()
+  {            
+      var xOrigin = 500;
+      var yOrigin = 250;
+      var yStride = 50;
       
-    this.currentWordImage = this.services.createTexture(
+      for ( var i = 0; i < this.wordList.length; i++ )
+      {
+         this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
+      
+         var wordImage = this.services.createTexture(
             ImageUtils.makeTextImage(this.displayString, wordFontOptions));
       
-    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
-    this.currentWordSprite.x = 500;
-    this.currentWordSprite.y = 250;
-    this.currentWordSprite.width = this.currentWordImage.img.width;
-    this.currentWordSprite.height = this.currentWordImage.img.height;
+        this.wordSprites[i].uniforms.u_texture = wordImage;
+        this.wordSprites[i].x = xOrigin;
+        this.wordSprites[i].y = yOrigin + yStride * i;
+        this.wordSprites[i].width = wordImage.img.width;
+        this.wordSprites[i].height = wordImage.img.height;  
+      }
   };
 
   return WordManager;
