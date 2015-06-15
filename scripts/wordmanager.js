@@ -43,12 +43,16 @@ define( [
     font: "40px sans-serif",
     yOffset: 30,
     height: 300,
-    fillStyle: "black",
+    fillStyle: "white",
   };
+    
+  var blanksString = "______________";
     
   var WordManager = function (services) {
     this.services = services;
     this.currentWord = "Invalid";
+    this.displayString = "";
+    this.letters = 0;
       
     this.words = ["turtle", "egg", "box", "cat"];
       
@@ -59,6 +63,20 @@ define( [
     this.setWordSprite();
   };
     
+  WordManager.prototype.getNumBlanks = function()
+  {
+      var numBlanks = this.currentWord.length - this.letters;
+      
+      if ( numBlanks < 0 )
+      {
+        return 0;   
+      }
+      else
+      {
+       return numBlanks;   
+      }
+  }
+    
   WordManager.prototype.randomizeWord = function ()
   {
       var randomIndex = Misc.randInt( this.words.length );
@@ -67,7 +85,7 @@ define( [
       if ( newWord !== this.currentWord )
       {
           this.currentWord = newWord;
-          //alert( "The word is " + this.currentWord );
+          this.letters = 0;
           this.setWordSprite();
       }
       else
@@ -78,13 +96,45 @@ define( [
     
   WordManager.prototype.checkWord = function( word ) 
   {
-        return word.toLowerCase() == this.currentWord;
+      if (word.toLowerCase() == this.currentWord.toLowerCase())
+      {
+        return true;   
+      }
+      else
+      {
+        this.letters++;
+          
+        if ( this.letters >= this.currentWord.length )
+        {
+           this.letters = this.currentWord.length - 1;   
+        }
+          
+        this.setWordSprite();
+          return false;
+      }
   };
     
-  WordManager.prototype.setWordSprite = function()
+  WordManager.prototype.makeDisplayWord = function(word,letters)
   {
+    var upperCaseWord = word.toUpperCase();
+    var displayString = upperCaseWord.substring(0, this.letters) + blanksString.substring(0,upperCaseWord.length - this.letters);
+    
+    var spacedString = "";
+      
+    for ( var i = 0; i < displayString.length; i++ )
+    {
+        spacedString += displayString.charAt(i) + " ";
+    }
+      
+    return spacedString;
+  }
+    
+  WordManager.prototype.setWordSprite = function()
+  {      
+    this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
+      
     this.currentWordImage = this.services.createTexture(
-            ImageUtils.makeTextImage( this.currentWord, wordFontOptions));
+            ImageUtils.makeTextImage(this.displayString, wordFontOptions));
       
     this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
     this.currentWordSprite.x = 500;
