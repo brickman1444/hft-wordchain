@@ -1,0 +1,10 @@
+{ 
+    "wordLists": [
+                     [ "Hold", "Fast", "Food", "Truck", "Stop", "Light" ],
+                     [ "Standing", "Water", "Bed", "Pan", "Fried", "Chicken" ],
+                     [ "Down", "Pillow", "Case", "Closed", "Door", "Knob" ],
+                     [ "Place", "Setting", "Sun", "Bathing", "Suit", "Jacket" ],
+                     [ "Covered", "Wagon", "Wheel", "House", "Boat", "Motor" ],
+                     [ "Fly", "Paper", "Plate", "Metal", "Shop", "Keeper" ]
+                 ]
+}

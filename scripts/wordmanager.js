@@ -33,11 +33,13 @@
 define( [
         'hft/misc/misc',
         '../bower_components/hft-utils/dist/imageutils',
-        '../bower_components/hft-utils/dist/spritemanager'],
+        '../bower_components/hft-utils/dist/spritemanager',
+        '../bower_components/hft-utils/dist/io'],
        function (
                  Misc,
                  ImageUtils,
-                 SpriteManager) {
+                 SpriteManager,
+                 IO) {
 
   var wordFontOptions = {
     font: "40px sans-serif",
@@ -48,20 +50,49 @@ define( [
     
   var blanksString = "______________";
     
+  var wordListURL = "assets/wordLists.json";
+    
+  var wordListLength = 6;
+    
   var WordManager = function (services) {
     this.services = services;
-    this.currentWord = "Invalid";
     this.displayString = "";
-    this.letters = 0;
+    this.letters = 1;
       
-    this.words = ["turtle", "egg", "box", "cat"];
+    this.wordSprites = [];
       
-    this.currentWordSprite = this.services.spriteManager.createSprite();
+    for ( var i = 0; i < wordListLength; i++ )
+    {
+      this.wordSprites[i] = this.services.spriteManager.createSprite();
+    }
       
-    this.randomizeWord();
+    this.xOrigin = 500;
+    this.yOrigin = 250;
+    this.yStride = 50;
       
-    this.setWordSprite();
+    this.setupWordLists();
   };
+    
+  WordManager.prototype.setupWordLists = function()
+  {
+      var that = this;
+      
+      var onLoad = function(err, wordListsObject)
+      {
+          if (err)
+          {
+           throw err;   
+          }
+          
+          that.wordLists = wordListsObject.wordLists;
+          
+          that.randomizeWordList();
+      };
+      
+      var options = { method: 'GET', };
+      
+      IO.sendJSON( wordListURL, {}, onLoad, options );
+  }
     
   WordManager.prototype.getNumBlanks = function()
   {
@@ -77,21 +108,32 @@ define( [
       }
   }
     
-  WordManager.prototype.randomizeWord = function ()
+  WordManager.prototype.randomizeWordList = function ()
   {
-      var randomIndex = Misc.randInt( this.words.length );
-      var newWord = this.words[randomIndex];
+      var that = this;
       
-      if ( newWord !== this.currentWord )
+      function chooseNewList()
       {
-          this.currentWord = newWord;
-          this.letters = 0;
-          this.setWordSprite();
-      }
-      else
-      {
-          this.randomizeWord();  
-      }
+         var randomIndex = Misc.randInt( that.wordLists.length );
+         var newWordList = that.wordLists[randomIndex];
+          
+         if ( newWordList != that.currentWordList )
+         {
+            that.currentWordList = newWordList;   
+         }
+         else
+         {
+            chooseNewList();   
+         }
+      };
+      
+      chooseNewList();
+      
+      this.currentWordIndex = 0;
+      this.currentWord = this.currentWordList[this.currentWordIndex];
+      
+      this.letters = 1;
+      this.setWordSprites();
   };
     
   WordManager.prototype.checkWord = function( word ) 
@@ -109,7 +151,7 @@ define( [
            this.letters = this.currentWord.length - 1;   
         }
           
-        this.setWordSprite();
+        this.setWordSprites();
           return false;
       }
   };
@@ -117,7 +159,7 @@ define( [
   WordManager.prototype.makeDisplayWord = function(word,letters)
   {
     var upperCaseWord = word.toUpperCase();
-    var displayString = upperCaseWord.substring(0, this.letters) + blanksString.substring(0,upperCaseWord.length - this.letters);
+    var displayString = upperCaseWord.substring(0, letters) + blanksString.substring(0,upperCaseWord.length - letters);
     
     var spacedString = "";
       
@@ -129,19 +171,56 @@ define( [
     return spacedString;
   }
     
-  WordManager.prototype.setWordSprite = function()
-  {      
-    this.displayString = this.makeDisplayWord( this.currentWord, this.letters);
+  WordManager.prototype.setWordSprites = function()
+  {          
+      // Before current word
+      for ( var i = 0; i < this.currentWordIndex; i++ )
+      {
+         this.displayString = this.makeDisplayWord( this.currentWordList[i], 100);
       
-    this.currentWordImage = this.services.createTexture(
-            ImageUtils.makeTextImage(this.displayString, wordFontOptions));
+         this.makeSprite( i, this.displayString );
+      }
       
-    this.currentWordSprite.uniforms.u_texture = this.currentWordImage;
-    this.currentWordSprite.x = 500;
-    this.currentWordSprite.y = 250;
-    this.currentWordSprite.width = this.currentWordImage.img.width;
-    this.currentWordSprite.height = this.currentWordImage.img.height;
+      //Current word
+      this.displayString = this.makeDisplayWord( this.currentWordList[this.currentWordIndex], this.letters);
+      
+      this.makeSprite( this.currentWordIndex, this.displayString );
+     
+      
+      //After current word
+      for ( var i = this.currentWordIndex + 1; i < this.currentWordList.length; i++ )
+      {
+         this.displayString = this.makeDisplayWord( this.currentWordList[i], 0);
+      
+         this.makeSprite( i, this.displayString );
+      }
   };
+    
+  WordManager.prototype.makeSprite = function( index, wordString )
+  {
+        var wordImage = this.services.createTexture(
+            ImageUtils.makeTextImage(wordString, wordFontOptions));
+      
+        this.wordSprites[index].uniforms.u_texture = wordImage;
+        this.wordSprites[index].x = this.xOrigin;
+        this.wordSprites[index].y = this.yOrigin + this.yStride * index;
+        this.wordSprites[index].width = wordImage.img.width;
+        this.wordSprites[index].height = wordImage.img.height;  
+  }
+  
+  WordManager.prototype.advanceWordIndex = function()
+  {
+    this.currentWordIndex++;
+      
+    if ( this.currentWordIndex >= this.currentWordList.length )
+    {
+        this.randomizeWordList();
+    }
+      
+    this.currentWord = this.currentWordList[this.currentWordIndex];
+    this.letters = 1;
+    this.setWordSprites();
+  }
 
   return WordManager;
 });
