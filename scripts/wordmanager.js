@@ -84,10 +84,7 @@ define( [
            throw err;   
           }
           
-          that.wordList = wordListsObject.wordList;
-          
-          that.currentWordIndex = 0;
-          that.currentWord = that.wordList[that.currentWordIndex];
+          that.wordLists = wordListsObject.wordLists;
           
           that.randomizeWordList();
       };
@@ -113,20 +110,30 @@ define( [
     
   WordManager.prototype.randomizeWordList = function ()
   {
-      //var randomIndex = Misc.randInt( this.words.length );
-      //var newWord = this.words[randomIndex];
+      var that = this;
       
-      //if ( newWord !== this.currentWord )
-      //{
-          //this.wordList = sampleWordList;
-          this.currentWordIndex = 0;
-          this.letters = 1;
-          this.setWordSprites();
-      //}
-      //else
-      //{
-    //      this.randomizeWord();  
-      //}
+      function chooseNewList()
+      {
+         var randomIndex = Misc.randInt( that.wordLists.length );
+         var newWordList = that.wordLists[randomIndex];
+          
+         if ( newWordList != that.currentWordList )
+         {
+            that.currentWordList = newWordList;   
+         }
+         else
+         {
+            chooseNewList();   
+         }
+      };
+      
+      chooseNewList();
+      
+      this.currentWordIndex = 0;
+      this.currentWord = this.currentWordList[this.currentWordIndex];
+      
+      this.letters = 1;
+      this.setWordSprites();
   };
     
   WordManager.prototype.checkWord = function( word ) 
@@ -169,21 +176,21 @@ define( [
       // Before current word
       for ( var i = 0; i < this.currentWordIndex; i++ )
       {
-         this.displayString = this.makeDisplayWord( this.wordList[i], 100);
+         this.displayString = this.makeDisplayWord( this.currentWordList[i], 100);
       
          this.makeSprite( i, this.displayString );
       }
       
       //Current word
-      this.displayString = this.makeDisplayWord( this.wordList[this.currentWordIndex], this.letters);
+      this.displayString = this.makeDisplayWord( this.currentWordList[this.currentWordIndex], this.letters);
       
       this.makeSprite( this.currentWordIndex, this.displayString );
      
       
       //After current word
-      for ( var i = this.currentWordIndex + 1; i < this.wordList.length; i++ )
+      for ( var i = this.currentWordIndex + 1; i < this.currentWordList.length; i++ )
       {
-         this.displayString = this.makeDisplayWord( this.wordList[i], 0);
+         this.displayString = this.makeDisplayWord( this.currentWordList[i], 0);
       
          this.makeSprite( i, this.displayString );
       }
@@ -205,12 +212,12 @@ define( [
   {
     this.currentWordIndex++;
       
-    if ( this.currentWordIndex >= this.wordList.length )
+    if ( this.currentWordIndex >= this.currentWordList.length )
     {
         this.randomizeWordList();
     }
       
-    this.currentWord = this.wordList[this.currentWordIndex];
+    this.currentWord = this.currentWordList[this.currentWordIndex];
     this.letters = 1;
     this.setWordSprites();
   }
