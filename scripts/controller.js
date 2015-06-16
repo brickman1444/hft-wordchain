@@ -122,6 +122,7 @@ requirejs(
   
   var wordInput = $("word-choice");
   var wordChoiceButton = $("word-choice-button");
+  var wordGuessForm = $("word-guess-form");
   
   wordChoiceButton.addEventListener('click', inputSubmit, false);
   
@@ -143,7 +144,7 @@ requirejs(
       wordInput.value = "";
   }
   
-    function inputChange()
+  function inputChange()
   {
 	  //alert("input change")
   }
@@ -167,7 +168,50 @@ requirejs(
             direction: "down",
         });  
   }
-      
+        
+  var enterButtonsMode = function()
+  {
+      unhideButtons();
+      hideWordChoice();
+  };
+        
+  var enterWordChoiceMode = function()
+  {
+      unhideWordChoice();
+      hideButtons();
+  };
+        
+  function hideButtons() {
+      hideElement(upButton);
+      hideElement(downButton);
+  };
+        
+  function unhideButtons() {
+      unhideElement(upButton);
+      unhideElement(downButton);
+  };
+        
+  function hideWordChoice() {
+      hideElement(wordGuessForm);
+  };
+        
+  function unhideWordChoice() {
+      unhideElement(wordGuessForm);
+  };
+        
+  function hideElement(element)
+  {
+    element.style.visibility = 'hidden';
+  };
+        
+  function unhideElement(element)
+  {
+    element.style.visibility = 'visible';
+  };
+        
+  //enterButtonsMode();
+  enterWordChoiceMode();
+        
   ImageLoader.loadImages(images, startClient);
 });
 

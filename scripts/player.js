@@ -140,7 +140,7 @@ define([
     
   Player.prototype.handleDirectionButton = function(msg)
   {
-      if ( msg.direction = "up" )
+      if ( msg.direction == "up" )
       {
           alert("up");
       }
