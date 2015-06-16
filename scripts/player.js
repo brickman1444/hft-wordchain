@@ -78,6 +78,8 @@ define([
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
       netPlayer.addEventListener('busy', Player.prototype.handleBusyMsg.bind(this));
       netPlayer.addEventListener('word choice', Player.prototype.handleWordChoiceMsg.bind(this));
+      netPlayer.addEventListener('down press', Player.prototype.handleDirectionButton.bind(this));
+      netPlayer.addEventListener('up press', Player.prototype.handleDirectionButton.bind(this));
 
       this.setName(name);
       this.score = 0;
@@ -134,6 +136,20 @@ define([
     } else {
       this.setName(msg.name.replace(/[<>]/g, ''));
     }
+  };
+    
+  Player.prototype.handleDirectionButton = function(msg)
+  {
+      if ( msg.direction == "up" )
+      {
+          this.services.wordManager.setTop();
+      }
+      else
+      {
+         this.services.wordManager.setBottom(); 
+      }
+      
+      this.services.wordManager.giveLetter();
   };
 
   Player.prototype.sendCmd = function(cmd, data) {

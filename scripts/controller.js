@@ -120,13 +120,14 @@ requirejs(
     idle:  { url: "assets/spr_idle.png", },
   };
   
-  var wordInput = $("word-choice")
-  var wordChoiceButton = $("word-choice-button")
+  var wordInput = $("word-choice");
+  var wordChoiceButton = $("word-choice-button");
+  var wordGuessForm = $("word-guess-form");
   
   wordChoiceButton.addEventListener('click', inputSubmit, false);
   
   if (wordInput.form) {
-    wordInput.form.addEventListener('submit', formSubmit, false);
+    wordInput.form.addEventListener('submit', formSubmit, true);
   }
   
   function formSubmit()
@@ -141,13 +142,78 @@ requirejs(
             word: wordInput.value,
         });
       wordInput.value = "";
+      enterButtonsMode();
   }
   
-    function inputChange()
+  function inputChange()
   {
 	  //alert("input change")
   }
 
+  var upButton = $("up-button");
+  var downButton = $("down-button");
+        
+  upButton.addEventListener('click', upPress, false);
+  downButton.addEventListener('click', downPress, false);
+                            
+  function upPress()
+  {
+     g_client.sendCmd('up press', {
+            direction: "up",
+        }); 
+     enterWordChoiceMode();
+  }
+                            
+  function downPress()
+  {
+     g_client.sendCmd('down press', {
+            direction: "down",
+        });  
+     enterWordChoiceMode();
+  }
+        
+  var enterButtonsMode = function()
+  {
+      unhideButtons();
+      hideWordChoice();
+  };
+        
+  var enterWordChoiceMode = function()
+  {
+      unhideWordChoice();
+      hideButtons();
+  };
+        
+  function hideButtons() {
+      hideElement(upButton);
+      hideElement(downButton);
+  };
+        
+  function unhideButtons() {
+      unhideElement(upButton);
+      unhideElement(downButton);
+  };
+        
+  function hideWordChoice() {
+      hideElement(wordGuessForm);
+  };
+        
+  function unhideWordChoice() {
+      unhideElement(wordGuessForm);
+  };
+        
+  function hideElement(element)
+  {
+    element.style.visibility = 'hidden';
+  };
+        
+  function unhideElement(element)
+  {
+    element.style.visibility = 'visible';
+  };
+        
+  enterButtonsMode();
+        
   ImageLoader.loadImages(images, startClient);
 });
 
