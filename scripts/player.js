@@ -119,10 +119,10 @@ define([
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
     
-    if ( this.services.wordManager.checkWord( msg.word ) )
+    if ( this.services.wordManager.checkWord( msg.word, true ) )
     {
         this.addPoints( this.services.wordManager.getNumBlanks() );
-        this.services.wordManager.advanceWordIndex();
+        this.services.wordManager.advanceWordIndex( true );
     }
   };
 

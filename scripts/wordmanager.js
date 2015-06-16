@@ -94,9 +94,16 @@ define( [
       IO.sendJSON( wordListURL, {}, onLoad, options );
   }
     
-  WordManager.prototype.getNumBlanks = function()
+  WordManager.prototype.getNumBlanks = function( isTop )
   {
-      var numBlanks = this.currentWord.length - this.letters;
+      if ( isTop )
+      {
+          var numBlanks = this.currentTopWord.length - this.topLetters;
+      }
+      else
+      {
+          var numBlanks = this.currentBottomWord.length - this.bottomLetters;
+      }
       
       if ( numBlanks < 0 )
       {
@@ -114,7 +121,7 @@ define( [
       
       function chooseNewList()
       {
-         var randomIndex = Misc.randInt( that.wordLists.length );
+         var randomIndex = Misc.randInt( wordListLength );
          var newWordList = that.wordLists[randomIndex];
           
          if ( newWordList != that.currentWordList )
@@ -129,30 +136,57 @@ define( [
       
       chooseNewList();
       
-      this.currentWordIndex = 0;
-      this.currentWord = this.currentWordList[this.currentWordIndex];
+      this.currentTopWordIndex = 1;
+      this.currentTopWord = this.currentWordList[this.currentTopWordIndex];
       
-      this.letters = 1;
+      this.currentBottomWordIndex = wordListLength - 2;
+      this.currentBottomWord = this.currentWordList[this.currentBottomWordIndex];
+      
+      this.topLetters = 0;
+      this.bottomLetters = 0;
+      
       this.setWordSprites();
   };
     
-  WordManager.prototype.checkWord = function( word ) 
+  WordManager.prototype.checkWord = function( word, isTop ) 
   {
-      if (word.toLowerCase() == this.currentWord.toLowerCase())
+      if ( isTop )
       {
-        return true;   
+          if (word.toLowerCase() == this.currentTopWord.toLowerCase())
+          {
+            return true;   
+          }
+          else
+          {
+            this.topLetters++;
+
+            if ( this.topLetters >= this.currentTopWord.length )
+            {
+               this.topLetters = this.currentTopWord.length - 1;   
+            }
+
+            this.setWordSprites();
+            return false;
+          }
       }
       else
       {
-        this.letters++;
-          
-        if ( this.letters >= this.currentWord.length )
-        {
-           this.letters = this.currentWord.length - 1;   
-        }
-          
-        this.setWordSprites();
-          return false;
+          if (word.toLowerCase() == this.currentBottomWord.toLowerCase())
+          {
+            return true;   
+          }
+          else
+          {
+            this.bottomLetters++;
+
+            if ( this.bottomLetters >= this.currentBottomWord.length )
+            {
+               this.bottomLetters = this.currentBottomWord.length - 1;   
+            }
+
+            this.setWordSprites();
+            return false;
+          } 
       }
   };
     
@@ -173,24 +207,37 @@ define( [
     
   WordManager.prototype.setWordSprites = function()
   {          
-      // Before current word
-      for ( var i = 0; i < this.currentWordIndex; i++ )
+      // Before top word
+      for ( var i = 0; i < this.currentTopWordIndex; i++ )
       {
          this.displayString = this.makeDisplayWord( this.currentWordList[i], 100);
       
          this.makeSprite( i, this.displayString );
       }
       
-      //Current word
-      this.displayString = this.makeDisplayWord( this.currentWordList[this.currentWordIndex], this.letters);
+      //top word
+      this.displayString = this.makeDisplayWord( this.currentTopWord, this.topLetters);
       
-      this.makeSprite( this.currentWordIndex, this.displayString );
+      this.makeSprite( this.currentTopWordIndex, this.displayString );
      
       
-      //After current word
-      for ( var i = this.currentWordIndex + 1; i < this.currentWordList.length; i++ )
+      // middle blank words
+      for ( var i = this.currentTopWordIndex + 1; i < this.currentBottomWordIndex; i++ )
       {
          this.displayString = this.makeDisplayWord( this.currentWordList[i], 0);
+      
+         this.makeSprite( i, this.displayString );
+      }
+      
+      // bottom word
+      this.displayString = this.makeDisplayWord( this.currentBottomWord, this.bottomLetters);
+      
+      this.makeSprite( this.currentBottomWordIndex, this.displayString );
+      
+      // after bottom word
+      for ( var i = this.currentBottomWordIndex + 1; i < wordListLength; i++ )
+      {
+         this.displayString = this.makeDisplayWord( this.currentWordList[i], 100);
       
          this.makeSprite( i, this.displayString );
       }
@@ -208,17 +255,26 @@ define( [
         this.wordSprites[index].height = wordImage.img.height;  
   }
   
-  WordManager.prototype.advanceWordIndex = function()
+  WordManager.prototype.advanceWordIndex = function( isTop )
   {
-    this.currentWordIndex++;
-      
-    if ( this.currentWordIndex >= this.currentWordList.length )
+    if ( isTop )
     {
-        this.randomizeWordList();
+        this.currentTopWordIndex++;
+        this.currentTopWord = this.currentWordList[this.currentTopWordIndex];
+        this.topLetters = 0;
+    }
+    else
+    {
+        this.currentBottomWordIndex--;
+        this.currentBottomWord = this.currentWordList[this.currentBottomWordIndex];
+        this.bottomLetters = 0;
     }
       
-    this.currentWord = this.currentWordList[this.currentWordIndex];
-    this.letters = 1;
+    if ( this.currentBottomWordIndex < this.currentTopWordIndex )
+    {
+        this.randomizeWordList();   
+    }
+     
     this.setWordSprites();
   }
 
