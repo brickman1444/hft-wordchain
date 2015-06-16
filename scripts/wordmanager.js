@@ -267,6 +267,11 @@ define( [
         {
            this.topLetters = this.currentTopWord.length - 1;   
         }
+        
+        if ( this.currentTopWordIndex == this.currentBottomWordIndex )
+        {
+           this.bottomLetters = this.topLetters;   
+        }
     }
     else
     {
@@ -275,6 +280,11 @@ define( [
         if ( this.bottomLetters >= this.currentBottomWord.length )
         {
            this.bottomLetters = this.currentBottomWord.length - 1;   
+        }
+        
+        if ( this.currentTopWordIndex == this.currentBottomWordIndex )
+        {
+           this.topLetters = this.bottomLetters;   
         }
     }
       
