@@ -120,13 +120,13 @@ requirejs(
     idle:  { url: "assets/spr_idle.png", },
   };
   
-  var wordInput = $("word-choice")
-  var wordChoiceButton = $("word-choice-button")
+  var wordInput = $("word-choice");
+  var wordChoiceButton = $("word-choice-button");
   
   wordChoiceButton.addEventListener('click', inputSubmit, false);
   
   if (wordInput.form) {
-    wordInput.form.addEventListener('submit', formSubmit, false);
+    wordInput.form.addEventListener('submit', formSubmit, true);
   }
   
   function formSubmit()
@@ -148,6 +148,26 @@ requirejs(
 	  //alert("input change")
   }
 
+  var upButton = $("up-button");
+  var downButton = $("down-button");
+        
+  upButton.addEventListener('click', upPress, false);
+  downButton.addEventListener('click', downPress, false);
+                            
+  function upPress()
+  {
+     g_client.sendCmd('up press', {
+            direction: "up",
+        }); 
+  }
+                            
+  function downPress()
+  {
+     g_client.sendCmd('down press', {
+            direction: "down",
+        });  
+  }
+      
   ImageLoader.loadImages(images, startClient);
 });
 
