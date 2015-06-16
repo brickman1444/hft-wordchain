@@ -32,7 +32,14 @@ html, body {
     background-color: purple;
 }
 #buttons {
-    position: absolute;
+
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+#form {
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -55,17 +62,13 @@ img {
     font-size: 70px;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
-    bottom: 60px;
-    position: absolute;
-}
-#left {
-  left: 20px;
-}
-#right {
-  left: 140px;
+    top: 60px;
 }
 #up {
   right: 20px;
+}
+#down {
+  left: 20px;
 }
 #avatar {
     display: block;
