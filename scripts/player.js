@@ -121,10 +121,10 @@ define([
     
   Player.prototype.handleWordChoiceMsg = function(msg) {
     
-    if ( this.services.wordManager.checkWord( msg.word, true ) )
+    if ( this.services.wordManager.checkWord( msg.word ) )
     {
         this.addPoints( this.services.wordManager.getNumBlanks() );
-        this.services.wordManager.advanceWordIndex( true );
+        this.services.wordManager.advanceWordIndex();
     }
   };
 
@@ -142,12 +142,14 @@ define([
   {
       if ( msg.direction == "up" )
       {
-          alert("up");
+          this.services.wordManager.setTop();
       }
       else
       {
-         alert("down"); 
+         this.services.wordManager.setBottom(); 
       }
+      
+      this.services.wordManager.giveLetter();
   };
 
   Player.prototype.sendCmd = function(cmd, data) {

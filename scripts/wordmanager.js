@@ -94,9 +94,9 @@ define( [
       IO.sendJSON( wordListURL, {}, onLoad, options );
   }
     
-  WordManager.prototype.getNumBlanks = function( isTop )
+  WordManager.prototype.getNumBlanks = function()
   {
-      if ( isTop )
+      if ( this.isTop )
       {
           var numBlanks = this.currentTopWord.length - this.topLetters;
       }
@@ -148,45 +148,15 @@ define( [
       this.setWordSprites();
   };
     
-  WordManager.prototype.checkWord = function( word, isTop ) 
+  WordManager.prototype.checkWord = function( word ) 
   {
-      if ( isTop )
+      if ( this.isTop )
       {
-          if (word.toLowerCase() == this.currentTopWord.toLowerCase())
-          {
-            return true;   
-          }
-          else
-          {
-            this.topLetters++;
-
-            if ( this.topLetters >= this.currentTopWord.length )
-            {
-               this.topLetters = this.currentTopWord.length - 1;   
-            }
-
-            this.setWordSprites();
-            return false;
-          }
+          return word.toLowerCase() == this.currentTopWord.toLowerCase();
       }
       else
       {
-          if (word.toLowerCase() == this.currentBottomWord.toLowerCase())
-          {
-            return true;   
-          }
-          else
-          {
-            this.bottomLetters++;
-
-            if ( this.bottomLetters >= this.currentBottomWord.length )
-            {
-               this.bottomLetters = this.currentBottomWord.length - 1;   
-            }
-
-            this.setWordSprites();
-            return false;
-          } 
+          return word.toLowerCase() == this.currentBottomWord.toLowerCase();
       }
   };
     
@@ -255,9 +225,9 @@ define( [
         this.wordSprites[index].height = wordImage.img.height;  
   }
   
-  WordManager.prototype.advanceWordIndex = function( isTop )
+  WordManager.prototype.advanceWordIndex = function()
   {
-    if ( isTop )
+    if ( this.isTop )
     {
         this.currentTopWordIndex++;
         this.currentTopWord = this.currentWordList[this.currentTopWordIndex];
@@ -277,6 +247,39 @@ define( [
      
     this.setWordSprites();
   }
+  
+  WordManager.prototype.setTop = function()
+  {
+    this.isTop = true;  
+  };
+    
+  WordManager.prototype.setBottom = function()
+  {
+    this.isTop = false;  
+  };
+    
+  WordManager.prototype.giveLetter = function() {
+    if ( this.isTop )
+    {
+        this.topLetters++;
+
+        if ( this.topLetters >= this.currentTopWord.length )
+        {
+           this.topLetters = this.currentTopWord.length - 1;   
+        }
+    }
+    else
+    {
+        this.bottomLetters++;
+
+        if ( this.bottomLetters >= this.currentBottomWord.length )
+        {
+           this.bottomLetters = this.currentBottomWord.length - 1;   
+        }
+    }
+      
+    this.setWordSprites();
+  };
 
   return WordManager;
 });

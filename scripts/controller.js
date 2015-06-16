@@ -142,6 +142,7 @@ requirejs(
             word: wordInput.value,
         });
       wordInput.value = "";
+      enterButtonsMode();
   }
   
   function inputChange()
@@ -160,6 +161,7 @@ requirejs(
      g_client.sendCmd('up press', {
             direction: "up",
         }); 
+     enterWordChoiceMode();
   }
                             
   function downPress()
@@ -167,6 +169,7 @@ requirejs(
      g_client.sendCmd('down press', {
             direction: "down",
         });  
+     enterWordChoiceMode();
   }
         
   var enterButtonsMode = function()
@@ -209,8 +212,7 @@ requirejs(
     element.style.visibility = 'visible';
   };
         
-  //enterButtonsMode();
-  enterWordChoiceMode();
+  enterButtonsMode();
         
   ImageLoader.loadImages(images, startClient);
 });
