@@ -35,13 +35,23 @@ define(['./player'], function(Player) {
   var PlayerManager = function(services) {
     this.services = services;
     this.players = [];
+    this.currentTurnPlayer = null;
   };
 
   PlayerManager.prototype.startPlayer = function(netPlayer, name) {
     var player = new Player(this.services, name, netPlayer);
     this.players.push(player);
+      
+    if (this.currentTurnPlayer == null) {
+        this.currentTurnPlayer = player;
+        player.startTurn();
+    }
+    else {
+        player.endTurn();      
+    }
+      
     return player;
-  }
+  };
 
   PlayerManager.prototype.removePlayer = function(playerToRemove) {
     var netPlayer = playerToRemove.netPlayer;
@@ -60,6 +70,21 @@ define(['./player'], function(Player) {
         return this;
       }
     }
+  };
+    
+  PlayerManager.prototype.advanceTurn = function(callback) {
+    
+      this.currentTurnPlayer.endTurn();
+      
+      var playerIndex = this.players.indexOf(this.currentTurnPlayer);
+      
+      playerIndex++;
+      
+      playerIndex %= this.players.length;
+      
+      this.currentTurnPlayer = this.players[playerIndex];
+      
+      this.currentTurnPlayer.startTurn();
   };
 
   return PlayerManager;

@@ -108,6 +108,8 @@ requirejs(
     g_client.addEventListener('score', handleScore);
     g_client.addEventListener('die', handleDeath);
     g_client.addEventListener('setColor', handleSetColor);
+    g_client.addEventListener('end turn', handleEndTurn);
+    g_client.addEventListener('start turn', handleStartTurn);
 
     var sounds = {};
     g_audioManager = new AudioManager(sounds);
@@ -212,7 +214,14 @@ requirejs(
     element.style.visibility = 'visible';
   };
         
-  enterButtonsMode();
+  var handleStartTurn = function() {
+      enterButtonsMode();
+  };
+        
+  var handleEndTurn = function() {
+      hideButtons();
+      hideWordChoice();
+  };
         
   ImageLoader.loadImages(images, startClient);
 });

@@ -84,6 +84,7 @@ define([
       this.setName(name);
       this.score = 0;
       this.addPoints(0);
+      this.endTurn();
 
       this.reset();
     };
@@ -150,6 +151,14 @@ define([
       }
       
       this.services.wordManager.giveLetter();
+  };
+    
+  Player.prototype.endTurn = function() {
+      this.sendCmd("end turn");
+  };
+    
+  Player.prototype.startTurn = function() {
+      this.sendCmd("start turn");
   };
 
   Player.prototype.sendCmd = function(cmd, data) {
