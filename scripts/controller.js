@@ -41,6 +41,7 @@ requirejs(
     '../bower_components/hft-utils/dist/audio',
     '../bower_components/hft-utils/dist/imageloader',
     '../bower_components/hft-utils/dist/imageutils',
+    '../bower_components/hft-utils/dist/colorutils'
   ], function(
     CommonUI,
     GameClient,
@@ -50,7 +51,8 @@ requirejs(
     Touch,
     AudioManager,
     ImageLoader,
-    ImageUtils) {
+    ImageUtils,
+    colorUtils) {
   var g_client;
   var g_audioManager;
   var g_clock;
@@ -93,16 +95,10 @@ requirejs(
     };
 
     var handleSetColor = function(msg) {
-      var canvas = $("avatar");
-      var width = canvas.clientWidth;
-      var height = canvas.clientHeight;
-      canvas.width = width;
-      canvas.height = height;
-      var ctx = canvas.getContext("2d");
-      var coloredImage = ImageUtils.adjustHSV(images.idle.img, msg.h, msg.s, msg.v, msg.range)
-      var frame = ImageUtils.cropImage(coloredImage, 0, 0, 16, 16);
-      var frame = ImageUtils.scaleImage(frame, 128, 128);
-      ctx.drawImage(frame, 0, 0, ctx.canvas.width, ctx.canvas.height);
+      
+      var cssColor = colorUtils.makeCSSColorFromRgba255(msg.r,msg.g,msg.b);
+        
+      document.body.style.background = cssColor;
     };
 
     g_client.addEventListener('score', handleScore);
@@ -117,11 +113,14 @@ requirejs(
     CommonUI.setupStandardControllerUI(g_client, globals);
 
   };
+        
 
   var images = {
     idle:  { url: "assets/spr_idle.png", },
   };
   
+  var bodyElement = $("body");
+        
   var wordInput = $("word-choice");
   var wordChoiceButton = $("word-choice-button");
   var wordGuessForm = $("word-guess-form");

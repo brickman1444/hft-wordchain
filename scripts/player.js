@@ -72,7 +72,7 @@ define([
       this.color.id;
 
       this.scoreLine = this.services.scoreManager.createScoreLine(this, this.color);
-      this.scoreLine.ctx.drawImage(this.services.images.idle.imgColors[this.color.id][0], 0, 0);
+      //this.scoreLine.ctx.drawImage(this.services.images.idle.imgColors[this.color.id][0], 0, 0);
 
       netPlayer.addEventListener('disconnect', Player.prototype.handleDisconnect.bind(this));
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
