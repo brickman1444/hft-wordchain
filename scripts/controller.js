@@ -41,6 +41,7 @@ requirejs(
     '../bower_components/hft-utils/dist/audio',
     '../bower_components/hft-utils/dist/imageloader',
     '../bower_components/hft-utils/dist/imageutils',
+    '../bower_components/hft-utils/dist/colorutils'
   ], function(
     CommonUI,
     GameClient,
@@ -50,7 +51,8 @@ requirejs(
     Touch,
     AudioManager,
     ImageLoader,
-    ImageUtils) {
+    ImageUtils,
+    colorUtils) {
   var g_client;
   var g_audioManager;
   var g_clock;
@@ -93,21 +95,17 @@ requirejs(
     };
 
     var handleSetColor = function(msg) {
-      var canvas = $("avatar");
-      var width = canvas.clientWidth;
-      var height = canvas.clientHeight;
-      canvas.width = width;
-      canvas.height = height;
-      var ctx = canvas.getContext("2d");
-      var coloredImage = ImageUtils.adjustHSV(images.idle.img, msg.h, msg.s, msg.v, msg.range)
-      var frame = ImageUtils.cropImage(coloredImage, 0, 0, 16, 16);
-      var frame = ImageUtils.scaleImage(frame, 128, 128);
-      ctx.drawImage(frame, 0, 0, ctx.canvas.width, ctx.canvas.height);
+      
+      var cssColor = colorUtils.makeCSSColorFromRgba255(msg.r,msg.g,msg.b);
+        
+      document.body.style.background = cssColor;
     };
 
     g_client.addEventListener('score', handleScore);
     g_client.addEventListener('die', handleDeath);
     g_client.addEventListener('setColor', handleSetColor);
+    g_client.addEventListener('end turn', handleEndTurn);
+    g_client.addEventListener('start turn', handleStartTurn);
 
     var sounds = {};
     g_audioManager = new AudioManager(sounds);
@@ -115,11 +113,14 @@ requirejs(
     CommonUI.setupStandardControllerUI(g_client, globals);
 
   };
+        
 
   var images = {
     idle:  { url: "assets/spr_idle.png", },
   };
   
+  var bodyElement = $("body");
+        
   var wordInput = $("word-choice");
   var wordChoiceButton = $("word-choice-button");
   var wordGuessForm = $("word-guess-form");
@@ -212,7 +213,14 @@ requirejs(
     element.style.visibility = 'visible';
   };
         
-  enterButtonsMode();
+  var handleStartTurn = function() {
+      enterButtonsMode();
+  };
+        
+  var handleEndTurn = function() {
+      hideButtons();
+      hideWordChoice();
+  };
         
   ImageLoader.loadImages(images, startClient);
 });
