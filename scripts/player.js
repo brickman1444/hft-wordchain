@@ -127,6 +127,8 @@ define([
         this.addPoints( this.services.wordManager.getNumBlanks() );
         this.services.wordManager.advanceWordIndex();
     }
+      
+    this.services.playerManager.advanceTurn();
   };
 
   Player.prototype.handleNameMsg = function(msg) {
