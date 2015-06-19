@@ -182,10 +182,10 @@ window.g = globals;
       var image = images[name];
       image.colors = [];
       image.imgColors = [];
-      for (var ii = 0; ii < image.colorize; ++ii) {
-        var h = ii / 32;
-        var s = (ii % 2) * -0.6;
-        var v = (ii % 2) * 0.1;
+      var ii = 0;
+        var h = 0;
+        var s = 0;
+        var v = 0;
         var range = duckBlueRange;
         colors.push({
           id: ii,
@@ -199,18 +199,9 @@ window.g = globals;
         var frames = [];
         var imgFrames = [];
         var x = 0;
-        for (var jj = 0; jj < numFrames; ++jj) {
-          var width = image.slices.length ? image.slices[jj] : image.slices;
-          var frame = ImageUtils.cropImage(coloredImage, x, 0, width, coloredImage.height);
-          frame = ImageUtils.scaleImage(frame, width * image.scale, frame.height * image.scale);
-          imgFrames.push(frame);
-          frame = createTexture(frame);
-          frames.push(frame);
-          x += width;
-        }
+
         image.colors[ii] = frames;
         image.imgColors[ii] = imgFrames;
-      }
     });
 
     var realImageMappings = {
@@ -254,7 +245,7 @@ window.g = globals;
     }
   };
 
-  ImageLoader.loadImages(images, processImages);
+  ImageLoader.loadImages(images, processImages); 
 
   var mainloop = function() {
     resize();
