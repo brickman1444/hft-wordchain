@@ -148,10 +148,10 @@ define(['../bower_components/hft-utils/dist/colorutils'
         this.name.style.color = cssString;
       },
       startTurn: function() {
-        this.line.style.backgroundImage = "linear-gradient(to right, #041d3f 10%, orange)";//"radial-gradient(darkblue,orange)";
+        this.line.style.border = ".25em orange outset";
       },
       endTurn: function() {
-        this.line.style.backgroundImage = "";
+        this.line.style.border = "";
       },
     };
     if (!this.elementHeight_) {
