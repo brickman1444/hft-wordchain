@@ -172,20 +172,16 @@ window.g = globals;
     move:  { url: "assets/spr_run.png",   colorize: 32, scale: 2, slices: 16, },
     jump:  { url: "assets/spr_jump.png",  colorize: 32, scale: 2, slices: [16, 17, 17, 18, 16, 16] },
   };
-  var colors = [];
+        
   g_services.images = images;
-  g_services.colors = colors;
+  g_services.colors = [];
   var processImages = function() {
 
-        colors.push({
-          r: 0,
-          g: 0,
-          b: 0,
-        });
-
-    var realImageMappings = {
-      "assets/tilesets/bricks.png": "assets/tilesets/bricks-real.png",
-    };
+    g_services.colors.push({
+      r: 0,
+      g: 0,
+      b: 0,
+    });
       
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;
