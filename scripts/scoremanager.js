@@ -142,6 +142,9 @@ define(function() {
       setMsg: function(s) {
         msgNode.nodeValue = s;
       },
+      setColor: function(color) {
+          name.style.color = color;
+      },
     };
     if (!this.elementHeight_) {
       this.elementHeight_ = line.clientHeight;
