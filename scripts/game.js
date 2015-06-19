@@ -176,39 +176,15 @@ window.g = globals;
   g_services.images = images;
   g_services.colors = colors;
   var processImages = function() {
-    // make 32 colors of duck. Maybe we should do this in WebGL and use a shader!?
-    var duckBlueRange = [180 / 360, 275 / 360];
-    Object.keys(images).forEach(function(name) {
-      var image = images[name];
-      image.colors = [];
-      image.imgColors = [];
-      var ii = 0;
-        var h = 0;
-        var s = 0;
-        var v = 0;
-        var range = duckBlueRange;
-        colors.push({
-          id: ii,
-          h: h,
-          s: s,
-          v: v,
-          range: range,
-        });
-        var coloredImage = ii ? ImageUtils.adjustHSV(image.img, h, s, v, range) : image.img;
-        var numFrames = image.slices.length ? image.slices.length : image.img.width / image.slices;
-        var frames = [];
-        var imgFrames = [];
-        var x = 0;
 
-        image.colors[ii] = frames;
-        image.imgColors[ii] = imgFrames;
-    });
+        colors.push({
+          r: 0,
+          g: 0,
+          b: 0,
+        });
 
     var realImageMappings = {
       "assets/tilesets/bricks.png": "assets/tilesets/bricks-real.png",
-    };
-    var loaderOptions = {
-      imageMappings: globals.debug ? {} : realImageMappings,
     };
       
     var g_wordManager = new WordManager(g_services);
