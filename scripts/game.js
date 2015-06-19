@@ -177,9 +177,13 @@ window.g = globals;
   g_services.colors = [];
   var processImages = function() {
 
-    for( var r = .2; r <= .9; r += .2) {
-        for( var g = .2; g <= .9; g += .2) {
-            for( var b = .2; b <= .9; b += .2) {
+    var minVal = .4;
+    var maxVal = 1.01;
+    var stepSize = .1;
+      
+    for( var r = minVal; r <= maxVal; r += stepSize) {
+        for( var g = minVal; g <= maxVal; g += stepSize) {
+            for( var b = minVal; b <= maxVal; b += stepSize) {
                 if ( r != g && r != b && g != b) { // Don't put in grays
                     g_services.colors.push({
                       r: Math.floor(r * 255),
