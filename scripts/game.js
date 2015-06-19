@@ -177,11 +177,20 @@ window.g = globals;
   g_services.colors = [];
   var processImages = function() {
 
-    g_services.colors.push({
-      r: 0,
-      g: 0,
-      b: 0,
-    });
+    for( var r = .2; r <= .9; r += .2) {
+        for( var g = .2; g <= .9; g += .2) {
+            for( var b = .2; b <= .9; b += .2) {
+                if ( r != g && r != b && g != b) { // Don't put in grays
+                    g_services.colors.push({
+                      r: Math.floor(r * 255),
+                      g: Math.floor(g * 255),
+                      b: Math.floor(b * 255),
+                    });
+                }
+            };
+        };
+    };
+      
       
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;

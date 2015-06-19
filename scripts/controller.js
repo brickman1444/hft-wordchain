@@ -96,7 +96,7 @@ requirejs(
 
     var handleSetColor = function(msg) {
       
-      var cssColor = colorUtils.makeCSSColorFromRgba255(msg.r,msg.g,msg.b);
+      var cssColor = colorUtils.makeCSSColorFromRgba255(msg.r,msg.g,msg.b,255);
         
       document.body.style.background = cssColor;
     };
