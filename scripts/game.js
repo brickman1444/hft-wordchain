@@ -185,6 +185,7 @@ window.g = globals;
                       r: Math.floor(r * 255),
                       g: Math.floor(g * 255),
                       b: Math.floor(b * 255),
+                      a: 255,
                     });
                 }
             };
