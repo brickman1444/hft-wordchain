@@ -172,53 +172,30 @@ window.g = globals;
     move:  { url: "assets/spr_run.png",   colorize: 32, scale: 2, slices: 16, },
     jump:  { url: "assets/spr_jump.png",  colorize: 32, scale: 2, slices: [16, 17, 17, 18, 16, 16] },
   };
-  var colors = [];
+        
   g_services.images = images;
-  g_services.colors = colors;
+  g_services.colors = [];
   var processImages = function() {
-    // make 32 colors of duck. Maybe we should do this in WebGL and use a shader!?
-    var duckBlueRange = [180 / 360, 275 / 360];
-    Object.keys(images).forEach(function(name) {
-      var image = images[name];
-      image.colors = [];
-      image.imgColors = [];
-      for (var ii = 0; ii < image.colorize; ++ii) {
-        var h = ii / 32;
-        var s = (ii % 2) * -0.6;
-        var v = (ii % 2) * 0.1;
-        var range = duckBlueRange;
-        colors.push({
-          id: ii,
-          h: h,
-          s: s,
-          v: v,
-          range: range,
-        });
-        var coloredImage = ii ? ImageUtils.adjustHSV(image.img, h, s, v, range) : image.img;
-        var numFrames = image.slices.length ? image.slices.length : image.img.width / image.slices;
-        var frames = [];
-        var imgFrames = [];
-        var x = 0;
-        for (var jj = 0; jj < numFrames; ++jj) {
-          var width = image.slices.length ? image.slices[jj] : image.slices;
-          var frame = ImageUtils.cropImage(coloredImage, x, 0, width, coloredImage.height);
-          frame = ImageUtils.scaleImage(frame, width * image.scale, frame.height * image.scale);
-          imgFrames.push(frame);
-          frame = createTexture(frame);
-          frames.push(frame);
-          x += width;
-        }
-        image.colors[ii] = frames;
-        image.imgColors[ii] = imgFrames;
-      }
-    });
 
-    var realImageMappings = {
-      "assets/tilesets/bricks.png": "assets/tilesets/bricks-real.png",
+    var minVal = .4;
+    var maxVal = 1.01;
+    var stepSize = .1;
+      
+    for( var r = minVal; r <= maxVal; r += stepSize) {
+        for( var g = minVal; g <= maxVal; g += stepSize) {
+            for( var b = minVal; b <= maxVal; b += stepSize) {
+                if ( r != g && r != b && g != b) { // Don't put in grays
+                    g_services.colors.push({
+                      r: Math.floor(r * 255),
+                      g: Math.floor(g * 255),
+                      b: Math.floor(b * 255),
+                      a: 255,
+                    });
+                }
+            };
+        };
     };
-    var loaderOptions = {
-      imageMappings: globals.debug ? {} : realImageMappings,
-    };
+      
       
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;
@@ -254,7 +231,7 @@ window.g = globals;
     }
   };
 
-  ImageLoader.loadImages(images, processImages);
+  ImageLoader.loadImages(images, processImages); 
 
   var mainloop = function() {
     resize();

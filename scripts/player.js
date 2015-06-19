@@ -58,6 +58,9 @@ define([
       this.services = services;
       this.renderer = services.renderer;
       this.netPlayer = netPlayer;
+        
+      this.scoreLine = this.services.scoreManager.createScoreLine(this, this.color);
+        
       if (availableColors.length == 0) {
         var colors = services.colors;
         for (var ii = 0; ii < colors.length; ++ii) {
@@ -65,14 +68,11 @@ define([
         }
       }
       var colorNdx = Math.floor(Math.random() * availableColors.length);
-      this.color = availableColors[colorNdx];
-      window.p = this;
-      netPlayer.sendCmd('setColor', this.color);
+      this.setColor( availableColors[colorNdx] );
       availableColors.splice(colorNdx, 1);
+      window.p = this;
+        
       this.color.id;
-
-      this.scoreLine = this.services.scoreManager.createScoreLine(this, this.color);
-      //this.scoreLine.ctx.drawImage(this.services.images.idle.imgColors[this.color.id][0], 0, 0);
 
       netPlayer.addEventListener('disconnect', Player.prototype.handleDisconnect.bind(this));
       netPlayer.addEventListener('setName', Player.prototype.handleNameMsg.bind(this));
@@ -95,6 +95,12 @@ define([
       this.playerName = name;
       this.scoreLine.setName(":" + name);
     }
+  };
+    
+  Player.prototype.setColor = function(color) {
+    this.color = color;
+    this.netPlayer.sendCmd('setColor', color);
+    this.scoreLine.setColor(color);
   };
 
   Player.prototype.reset = function() {
