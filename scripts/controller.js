@@ -107,7 +107,9 @@ requirejs(
     g_client.addEventListener('end turn', handleEndTurn);
     g_client.addEventListener('start turn', handleStartTurn);
 
-    var sounds = {};
+    var sounds = {
+        coin:              { jsfx: ["square",0.0000,0.4000,0.0000,0.0240,0.4080,0.3480,20.0000,909.0000,2400.0000,0.0000,0.0000,0.0000,0.0100,0.0003,0.0000,0.2540,0.1090,0.0000,0.0000,0.0000,0.0000,0.0000,1.0000,0.0000,0.0000,0.0000,0.0000], },
+    };
     g_audioManager = new AudioManager(sounds);
 
     CommonUI.setupStandardControllerUI(g_client, globals);
@@ -215,6 +217,7 @@ requirejs(
         
   var handleStartTurn = function() {
       enterButtonsMode();
+      g_audioManager.playSound("coin");
   };
         
   var handleEndTurn = function() {

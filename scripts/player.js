@@ -163,10 +163,12 @@ define([
     
   Player.prototype.endTurn = function() {
       this.sendCmd("end turn");
+      this.scoreLine.endTurn();
   };
     
   Player.prototype.startTurn = function() {
       this.sendCmd("start turn");
+      this.scoreLine.startTurn();
   };
 
   Player.prototype.sendCmd = function(cmd, data) {

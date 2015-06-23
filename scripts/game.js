@@ -247,7 +247,7 @@ window.g = globals;
     var xtraY = ((gl.canvas.height - levelHeight) / 2 | 0);
     gl.scissor(xtraX, xtraY, levelWidth, levelHeight);
     gl.enable(gl.SCISSOR_TEST);
-    gl.clearColor(0.5, 0.5, 0.5, 1.0);
+    gl.clearColor(0.15, 0.36, 0.53, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.SCISSOR_TEST);
     gl.disable(gl.BLEND);

@@ -144,8 +144,14 @@ define(['../bower_components/hft-utils/dist/colorutils'
         msgNode.nodeValue = s;
       },
       setColor: function(color) {
-          var cssString = colorUtils.makeCSSColorFromRgba255(color.r,color.g,color.b,color.a);
-          name.style.color = cssString;
+        var cssString = colorUtils.makeCSSColorFromRgba255(color.r,color.g,color.b,color.a);
+        this.name.style.color = cssString;
+      },
+      startTurn: function() {
+        this.line.style.border = ".25em orange outset";
+      },
+      endTurn: function() {
+        this.line.style.border = "";
       },
     };
     if (!this.elementHeight_) {
