@@ -1,14 +1,14 @@
 {
   "dependencies": {},
-  "description": "A game about guessing words",
+  "description": "A game about guessing words based on the game show Chain Reaction",
   "happyFunTimes": {
     "apiVersion": "1.10.0",
     "category": "game",
     "gameId": "wordchain",
     "gameType": "html",
-    "minPlayers": 1
+    "minPlayers": 2
   },
   "name": "Word Chain",
   "private": false,
-  "version": "0.0.21"
+  "version": "0.1.0"
 }
