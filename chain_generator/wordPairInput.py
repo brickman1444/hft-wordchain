@@ -3,8 +3,10 @@ import json
 
 # main
 
+fileName = "wordPairs.json"
+
 print("Reading in file")
-file = open("wordPairs.txt", mode='r')
+file = open(fileName, mode='r')
 
 root = json.load( file )
 file.close()
@@ -33,7 +35,7 @@ while(True):
 		print("%s has already been entered" % inputString)
 
 print("Writing data to file")
-file = open("wordPairs.txt", mode="w")
+file = open(fileName, mode="w")
 json.dump(root, file, indent="	")
 
 file.close()
