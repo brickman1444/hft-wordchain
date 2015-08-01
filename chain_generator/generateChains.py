@@ -1,6 +1,7 @@
 
 import json
 import copy
+import pdb
 
 # constants
 
@@ -17,25 +18,34 @@ def appendWordsToChain(partialChain, retList, shortList, pairDictionary):
 	lastWord = partialChain[-1]
 
 	if lastWord not in pairDictionary:
+		# end of the line
 		shortList.append(partialChain)
 		return
 
 	nextWords = pairDictionary[lastWord]
 
+	foundContinuation = False
 	for nextWord in nextWords:
 		if nextWord in partialChain:
-			shortList.append(partialChain)
-			return
-		else:
-			newChain = copy.copy(partialChain)
-			newChain.append(nextWord)
+			# repeat word
+			# don't add to the shortList here because the lastWord has other nextWords to try
+			# we don't know if it was a total dead end yet
+			continue
+
+		newChain = copy.copy(partialChain)
+		newChain.append(nextWord)
 	
+		foundContinuation = True
+
 		if len(newChain) < chainLength:
 			appendWordsToChain(newChain,retList,shortList,pairDictionary)
 		else:
 			retList.append( newChain )
 
-def naiveMethod(pairDictionary):
+	if not foundContinuation:
+		shortList.append(partialChain)
+
+def naiveMethod(pairDictionary,reverseDictionary):
 
 	retList = []
 	shortList = [] # to hold lists that are too short
@@ -49,7 +59,7 @@ def naiveMethod(pairDictionary):
 	print("Short List:")
 	shortCount = 0
 	for list in shortList:
-		if len(list) == (chainLength - 1):
+		if len(list) == (chainLength - 1) and list[0] not in reverseDictionary:
 			print(list)
 			shortCount += 1
 
@@ -57,9 +67,9 @@ def naiveMethod(pairDictionary):
 
 	return retList
 
-def getListsFromDictionary(pairDictionary):
+def getListsFromDictionary(pairDictionary,reverseDictionary):
 
-	return naiveMethod(pairDictionary)
+	return naiveMethod(pairDictionary,reverseDictionary)
 
 def getReverseDictionary(pairDictionary):
 
@@ -93,7 +103,7 @@ pairRoot = json.load( file )
 pairDictionary = pairRoot["word pairs"]
 reverseDictionary = getReverseDictionary( pairDictionary )
 
-lists = getListsFromDictionary( pairDictionary )
+lists = getListsFromDictionary( pairDictionary, reverseDictionary )
 
 print("Generated %d lists" % len(lists))
 

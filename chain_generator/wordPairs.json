@@ -1,594 +1,16 @@
 {
 	"word pairs": {
-		"cap": [
-			"gun"
-		],
-		"party": [
-			"hat"
-		],
-		"flash": [
-			"back"
-		],
-		"action": [
-			"packed"
-		],
-		"acquired": [
-			"taste"
-		],
-		"snow": [
-			"ball",
-			"day"
-		],
-		"pay": [
-			"check"
-		],
-		"sauce": [
-			"pan"
-		],
-		"high": [
-			"school",
-			"horse",
-			"road"
-		],
-		"park": [
-			"bench"
-		],
-		"grave": [
-			"yard"
-		],
-		"blue": [
-			"moon"
-		],
-		"food": [
-			"truck"
-		],
-		"pine": [
-			"scented"
-		],
-		"circle": [
-			"back",
-			"strafe"
-		],
-		"pop": [
-			"quiz"
-		],
-		"middle": [
-			"man",
-			"school",
-			"class"
-		],
-		"wash": [
-			"up"
-		],
-		"hard": [
-			"cover",
-			"hat",
-			"bargain",
-			"work"
-		],
-		"book": [
-			"case",
-			"shelf",
-			"store"
-		],
-		"pass": [
-			"port"
-		],
-		"quitting": [
-			"time"
-		],
-		"after": [
-			"noon"
-		],
-		"cross": [
-			"country"
-		],
-		"day": [
-			"break",
-			"off",
-			"time"
-		],
-		"tooth": [
-			"ache",
-			"pick"
-		],
-		"horse": [
-			"back"
-		],
-		"cast": [
-			"iron"
-		],
-		"life": [
-			"changing",
-			"boat",
-			"guard"
-		],
-		"loop": [
-			"hole"
-		],
-		"weight": [
-			"lifting",
-			"bearing"
-		],
-		"shop": [
-			"keeper",
-			"lifter",
-			"lifting"
-		],
-		"fruit": [
-			"cake"
-		],
-		"wagon": [
-			"wheel"
-		],
-		"figure": [
-			"eight"
-		],
-		"base": [
-			"ball"
-		],
-		"hair": [
-			"piece"
-		],
-		"dress": [
-			"rehearsal"
-		],
-		"business": [
-			"casual",
-			"hours"
-		],
-		"store": [
-			"house"
-		],
-		"tail": [
-			"gate"
-		],
-		"rain": [
-			"check"
-		],
-		"side": [
-			"burns",
-			"burn",
-			"kick"
-		],
-		"bag": [
-			"lady"
-		],
-		"pace": [
-			"maker"
-		],
-		"coffee": [
-			"maker",
-			"break"
-		],
-		"world": [
-			"wide"
-		],
-		"kick": [
-			"back"
-		],
-		"pick": [
-			"pocket",
-			"axe"
-		],
-		"house": [
-			"boat",
-			"work",
-			"fire"
-		],
-		"letter": [
-			"head"
-		],
-		"school": [
-			"house",
-			"bus"
-		],
-		"meter": [
-			"stick"
-		],
-		"lamp": [
-			"shade"
-		],
-		"turn": [
-			"table",
-			"key"
-		],
-		"band": [
-			"wagon"
-		],
-		"money": [
-			"back"
-		],
 		"silver": [
 			"bullet"
-		],
-		"race": [
-			"horse"
-		],
-		"ship": [
-			"wrecked"
-		],
-		"pillow": [
-			"case"
-		],
-		"wheel": [
-			"house",
-			"barrow"
-		],
-		"care": [
-			"free"
-		],
-		"steering": [
-			"wheel"
-		],
-		"pocket": [
-			"change"
-		],
-		"music": [
-			"hall",
-			"note"
-		],
-		"sword": [
-			"fish"
-		],
-		"burn": [
-			"notice"
-		],
-		"night": [
-			"light",
-			"time"
-		],
-		"car": [
-			"battery",
-			"pool"
-		],
-		"fried": [
-			"chicken",
-			"eggs"
-		],
-		"boat": [
-			"motor"
-		],
-		"pumping": [
-			"iron"
-		],
-		"foot": [
-			"ball",
-			"print"
-		],
-		"hall": [
-			"way"
-		],
-		"hand": [
-			"bag",
-			"written",
-			"basket"
-		],
-		"candle": [
-			"stick",
-			"wax"
-		],
-		"bee": [
-			"hive"
-		],
-		"bald": [
-			"eagle",
-			"cap"
-		],
-		"tie": [
-			"game"
-		],
-		"fire": [
-			"works",
-			"arm",
-			"truck",
-			"department"
-		],
-		"drug": [
-			"store"
-		],
-		"peer": [
-			"pressure"
-		],
-		"table": [
-			"spoon"
-		],
-		"light": [
-			"house",
-			"weight"
-		],
-		"case": [
-			"closed",
-			"worker"
-		],
-		"mind": [
-			"reader"
-		],
-		"library": [
-			"card"
-		],
-		"sun": [
-			"bathing",
-			"light"
-		],
-		"time": [
-			"share",
-			"sink"
-		],
-		"paper": [
-			"plate",
-			"back"
-		],
-		"soft": [
-			"ball"
-		],
-		"fast": [
-			"food"
-		],
-		"space": [
-			"station"
-		],
-		"sky": [
-			"blue"
-		],
-		"under": [
-			"world",
-			"belly",
-			"side"
-		],
-		"sea": [
-			"shell"
-		],
-		"green": [
-			"house",
-			"back"
-		],
-		"sound": [
-			"proof"
-		],
-		"box": [
-			"car"
-		],
-		"out": [
-			"house"
-		],
-		"scented": [
-			"candle"
-		],
-		"over": [
-			"coat",
-			"dressed"
-		],
-		"struck": [
-			"out"
-		],
-		"lock": [
-			"box"
-		],
-		"print": [
-			"news"
-		],
-		"kitchen": [
-			"sink"
-		],
-		"home": [
-			"work",
-			"town"
-		],
-		"bare": [
-			"foot"
-		],
-		"way": [
-			"side"
-		],
-		"neck": [
-			"tie"
-		],
-		"super": [
-			"power",
-			"natural"
-		],
-		"country": [
-			"music"
-		],
-		"good": [
-			"night",
-			"bye"
-		],
-		"shoe": [
-			"box",
-			"lace"
-		],
-		"dumb": [
-			"bell"
-		],
-		"finger": [
-			"nail"
-		],
-		"short": [
-			"hand"
-		],
-		"card": [
-			"board"
-		],
-		"dead": [
-			"ringer"
-		],
-		"field": [
-			"experience",
-			"day"
-		],
-		"wire": [
-			"tap"
-		],
-		"cave": [
-			"man"
-		],
-		"star": [
-			"struck"
-		],
-		"rock": [
-			"music"
-		],
-		"heart": [
-			"beat"
-		],
-		"lady": [
-			"bug"
-		],
-		"part": [
-			"time"
-		],
-		"stop": [
-			"light"
-		],
-		"moon": [
-			"light",
-			"walk"
-		],
-		"pressure": [
-			"cooker",
-			"valve"
-		],
-		"bar": [
-			"bell"
-		],
-		"dry": [
-			"run"
-		],
-		"news": [
-			"letter",
-			"paper",
-			"cast"
-		],
-		"cat": [
-			"walk"
-		],
-		"hourglass": [
-			"figure"
-		],
-		"plow": [
-			"share"
-		],
-		"sheet": [
-			"music"
-		],
-		"sink": [
-			"hole"
-		],
-		"guide": [
-			"book"
-		],
-		"truck": [
-			"stop"
-		],
-		"sleep": [
-			"walking"
-		],
-		"pecking": [
-			"order"
-		],
-		"court": [
-			"house"
-		],
-		"water": [
-			"bed",
-			"bottle",
-			"ski",
-			"hazard"
-		],
-		"old": [
-			"fashioned"
-		],
-		"wide": [
-			"berth"
-		],
-		"fashion": [
-			"sense"
-		],
-		"waste": [
-			"land"
-		],
-		"playing": [
-			"cards"
-		],
-		"hive": [
-			"mind"
-		],
-		"spoon": [
-			"feed"
-		],
-		"fish": [
-			"taco"
-		],
-		"roof": [
-			"top"
 		],
 		"free": [
 			"rein"
 		],
-		"note": [
-			"book"
+		"covered": [
+			"wagon"
 		],
-		"crop": [
-			"circle",
-			"circles"
-		],
-		"gun": [
-			"barrel"
-		],
-		"rat": [
-			"race"
-		],
-		"feel": [
-			"good"
-		],
-		"man": [
-			"hunt",
-			"eating"
-		],
-		"run": [
-			"down"
-		],
-		"back": [
-			"side",
-			"log",
-			"space",
-			"seat"
-		],
-		"standing": [
-			"water"
-		],
-		"spit": [
-			"fire"
-		],
-		"bug": [
-			"zapper"
-		],
-		"brain": [
-			"wash"
-		],
-		"gold": [
-			"digger"
-		],
-		"down": [
-			"pillow",
-			"under"
-		],
-		"suit": [
-			"jacket"
-		],
-		"sixth": [
-			"sense"
-		],
-		"drawing": [
-			"board"
-		],
-		"red": [
-			"neck"
-		],
-		"closed": [
-			"door"
+		"town": [
+			"hall"
 		],
 		"ball": [
 			"bearing",
@@ -596,183 +18,800 @@
 			"park",
 			"point"
 		],
-		"gene": [
-			"pool"
+		"bare": [
+			"foot"
 		],
-		"place": [
-			"setting"
+		"log": [
+			"cabin"
 		],
-		"boarding": [
-			"house"
+		"belt": [
+			"buckle",
+			"loop"
 		],
-		"department": [
-			"head"
-		],
-		"quarter": [
-			"note"
-		],
-		"covered": [
-			"wagon"
-		],
-		"open": [
-			"season"
-		],
-		"whole": [
-			"note"
-		],
-		"shooting": [
-			"star"
-		],
-		"town": [
-			"hall"
-		],
-		"setting": [
-			"sun"
-		],
-		"iron": [
-			"lung",
-			"clad"
-		],
-		"bottle": [
-			"neck"
-		],
-		"personal": [
-			"trainer"
-		],
-		"pan": [
-			"fried"
-		],
-		"key": [
-			"note"
-		],
-		"hot": [
-			"head"
-		],
-		"bull": [
-			"dog",
-			"fight"
-		],
-		"bathing": [
-			"suit"
-		],
-		"taste": [
-			"tester",
-			"test"
-		],
-		"ice": [
-			"cream"
-		],
-		"dark": [
-			"horse"
+		"paper": [
+			"plate",
+			"back"
 		],
 		"wax": [
 			"figure"
 		],
-		"scatter": [
-			"brain"
+		"air": [
+			"field"
 		],
-		"full": [
-			"scale",
-			"time",
-			"moon",
+		"flash": [
+			"back"
+		],
+		"bee": [
+			"hive"
+		],
+		"boat": [
+			"motor"
+		],
+		"text": [
+			"book"
+		],
+		"water": [
+			"bed",
+			"bottle",
+			"ski",
+			"hazard"
+		],
+		"sheet": [
+			"music"
+		],
+		"setting": [
+			"sun"
+		],
+		"gun": [
+			"barrel"
+		],
+		"shooting": [
+			"star"
+		],
+		"pocket": [
+			"change"
+		],
+		"whole": [
+			"note"
+		],
+		"bar": [
+			"bell"
+		],
+		"kick": [
+			"back",
+			"stand"
+		],
+		"truck": [
 			"stop"
 		],
-		"native": [
-			"language"
+		"house": [
+			"boat",
+			"work",
+			"fire"
+		],
+		"pace": [
+			"maker"
+		],
+		"rain": [
+			"check"
+		],
+		"coffee": [
+			"maker",
+			"break"
+		],
+		"sword": [
+			"fish"
+		],
+		"crop": [
+			"circle",
+			"circles"
+		],
+		"neck": [
+			"tie"
+		],
+		"chock": [
+			"full"
+		],
+		"door": [
+			"knob"
+		],
+		"suit": [
+			"jacket"
+		],
+		"key": [
+			"note"
+		],
+		"race": [
+			"horse"
+		],
+		"life": [
+			"changing",
+			"boat",
+			"guard"
+		],
+		"base": [
+			"ball"
+		],
+		"hard": [
+			"cover",
+			"hat",
+			"bargain",
+			"work"
+		],
+		"pressure": [
+			"cooker",
+			"valve"
+		],
+		"part": [
+			"time"
+		],
+		"gene": [
+			"pool"
+		],
+		"ice": [
+			"cream"
+		],
+		"turn": [
+			"table",
+			"key"
+		],
+		"fire": [
+			"works",
+			"arm",
+			"truck",
+			"department"
+		],
+		"action": [
+			"packed"
+		],
+		"basket": [
+			"ball",
+			"case"
+		],
+		"dry": [
+			"run"
+		],
+		"share": [
+			"crop"
+		],
+		"blue": [
+			"moon"
+		],
+		"figure": [
+			"eight"
+		],
+		"dog": [
+			"house"
+		],
+		"rock": [
+			"music"
+		],
+		"case": [
+			"closed",
+			"worker"
+		],
+		"park": [
+			"bench"
+		],
+		"arm": [
+			"chair"
+		],
+		"candle": [
+			"stick",
+			"wax"
+		],
+		"music": [
+			"hall",
+			"note"
+		],
+		"school": [
+			"house",
+			"bus"
+		],
+		"back": [
+			"side",
+			"log",
+			"space",
+			"seat"
 		],
 		"work": [
 			"horse",
 			"shop",
 			"out"
 		],
+		"food": [
+			"truck"
+		],
+		"dress": [
+			"rehearsal"
+		],
+		"under": [
+			"world",
+			"belly",
+			"side"
+		],
+		"hair": [
+			"piece"
+		],
+		"green": [
+			"house",
+			"back"
+		],
+		"game": [
+			"point"
+		],
+		"down": [
+			"pillow",
+			"under"
+		],
+		"print": [
+			"news"
+		],
+		"fashion": [
+			"sense"
+		],
+		"foot": [
+			"ball",
+			"print"
+		],
+		"sixth": [
+			"sense"
+		],
+		"fly": [
+			"paper"
+		],
+		"table": [
+			"spoon"
+		],
+		"party": [
+			"hat"
+		],
+		"loop": [
+			"hole"
+		],
+		"hold": [
+			"fast"
+		],
+		"star": [
+			"struck"
+		],
+		"rat": [
+			"race"
+		],
+		"fried": [
+			"chicken",
+			"eggs"
+		],
+		"drawing": [
+			"board"
+		],
+		"pillow": [
+			"case"
+		],
+		"dead": [
+			"ringer"
+		],
+		"after": [
+			"noon"
+		],
+		"field": [
+			"experience",
+			"day"
+		],
+		"brain": [
+			"wash"
+		],
+		"bug": [
+			"zapper"
+		],
+		"spit": [
+			"fire"
+		],
+		"native": [
+			"language"
+		],
+		"master": [
+			"mind"
+		],
+		"sound": [
+			"proof"
+		],
+		"shop": [
+			"keeper",
+			"lifter",
+			"lifting"
+		],
+		"standing": [
+			"water"
+		],
+		"dark": [
+			"horse"
+		],
+		"lamp": [
+			"shade"
+		],
 		"metal": [
 			"shop"
 		],
-		"air": [
-			"field"
+		"cap": [
+			"gun"
+		],
+		"drug": [
+			"store"
+		],
+		"iron": [
+			"lung",
+			"clad"
+		],
+		"man": [
+			"hunt",
+			"eating"
+		],
+		"muzzle": [
+			"flash"
+		],
+		"quarter": [
+			"note"
+		],
+		"traffic": [
+			"stop"
+		],
+		"sun": [
+			"bathing",
+			"light"
 		],
 		"travel": [
 			"guide"
+		],
+		"struck": [
+			"out"
+		],
+		"light": [
+			"house",
+			"weight"
+		],
+		"tail": [
+			"gate"
+		],
+		"place": [
+			"setting"
+		],
+		"red": [
+			"neck"
+		],
+		"bag": [
+			"lady"
+		],
+		"pan": [
+			"fried"
+		],
+		"ship": [
+			"wrecked"
+		],
+		"tar": [
+			"pit"
+		],
+		"country": [
+			"music"
+		],
+		"yard": [
+			"stick"
+		],
+		"library": [
+			"card"
+		],
+		"closed": [
+			"door"
+		],
+		"fast": [
+			"food"
+		],
+		"car": [
+			"battery",
+			"pool"
+		],
+		"store": [
+			"house"
+		],
+		"quitting": [
+			"time"
+		],
+		"body": [
+			"guard"
+		],
+		"bull": [
+			"dog",
+			"fight"
+		],
+		"pool": [
+			"party",
+			"noodle"
+		],
+		"old": [
+			"fashioned"
+		],
+		"wagon": [
+			"wheel"
+		],
+		"hot": [
+			"head"
+		],
+		"note": [
+			"book"
+		],
+		"book": [
+			"case",
+			"shelf",
+			"store"
+		],
+		"night": [
+			"light",
+			"time"
+		],
+		"hourglass": [
+			"figure"
+		],
+		"pop": [
+			"quiz"
+		],
+		"dragon": [
+			"fly"
+		],
+		"band": [
+			"wagon"
+		],
+		"money": [
+			"back"
+		],
+		"pay": [
+			"check"
+		],
+		"sleep": [
+			"walking"
+		],
+		"middle": [
+			"man",
+			"school",
+			"class"
 		],
 		"bed": [
 			"pan",
 			"rock",
 			"sheet"
 		],
-		"basket": [
-			"ball",
-			"case"
+		"space": [
+			"station"
 		],
-		"hold": [
-			"fast"
+		"finger": [
+			"nail"
 		],
-		"pit": [
-			"stop"
+		"peer": [
+			"pressure"
+		],
+		"stop": [
+			"light"
+		],
+		"business": [
+			"casual",
+			"hours"
+		],
+		"card": [
+			"board"
+		],
+		"way": [
+			"side"
+		],
+		"waste": [
+			"land"
+		],
+		"hive": [
+			"mind"
+		],
+		"bottle": [
+			"neck"
+		],
+		"power": [
+			"line"
+		],
+		"acquired": [
+			"taste"
+		],
+		"soft": [
+			"ball"
+		],
+		"ear": [
+			"drum"
 		],
 		"half": [
 			"baked",
 			"life",
-			"note"
+			"note",
+			"court"
 		],
-		"tap": [
-			"dancer"
+		"guide": [
+			"book"
+		],
+		"horse": [
+			"back",
+			"fly"
+		],
+		"fish": [
+			"taco"
+		],
+		"open": [
+			"season"
+		],
+		"meter": [
+			"stick"
+		],
+		"hall": [
+			"way"
+		],
+		"jam": [
+			"packed"
+		],
+		"bald": [
+			"eagle",
+			"cap"
+		],
+		"snow": [
+			"ball",
+			"day"
+		],
+		"wide": [
+			"berth"
+		],
+		"wheel": [
+			"house",
+			"barrow"
+		],
+		"cast": [
+			"iron"
+		],
+		"roof": [
+			"top"
+		],
+		"kitchen": [
+			"sink"
+		],
+		"moon": [
+			"light",
+			"walk"
+		],
+		"pass": [
+			"port"
+		],
+		"tooth": [
+			"ache",
+			"pick"
+		],
+		"playing": [
+			"cards"
+		],
+		"super": [
+			"power",
+			"natural"
+		],
+		"boarding": [
+			"house"
+		],
+		"lady": [
+			"bug"
+		],
+		"tie": [
+			"game"
+		],
+		"mind": [
+			"reader"
+		],
+		"cross": [
+			"country"
+		],
+		"burn": [
+			"notice"
+		],
+		"department": [
+			"head"
+		],
+		"lock": [
+			"box"
+		],
+		"full": [
+			"scale",
+			"time",
+			"moon",
+			"stop",
+			"court",
+			"house"
+		],
+		"run": [
+			"down"
+		],
+		"seat": [
+			"cushion"
+		],
+		"cave": [
+			"man"
+		],
+		"spoon": [
+			"feed"
+		],
+		"fruit": [
+			"cake"
+		],
+		"weight": [
+			"lifting",
+			"bearing"
+		],
+		"side": [
+			"burns",
+			"burn",
+			"kick"
+		],
+		"steering": [
+			"wheel"
+		],
+		"plate": [
+			"metal"
+		],
+		"heavy": [
+			"weight"
+		],
+		"box": [
+			"car"
+		],
+		"heart": [
+			"beat"
+		],
+		"dumb": [
+			"bell"
+		],
+		"plow": [
+			"share"
+		],
+		"out": [
+			"house",
+			"crop"
+		],
+		"time": [
+			"share",
+			"sink"
+		],
+		"short": [
+			"hand"
+		],
+		"gold": [
+			"digger"
 		],
 		"drum": [
 			"head",
 			"roll"
 		],
-		"ear": [
-			"drum"
+		"care": [
+			"free"
 		],
-		"power": [
-			"line"
+		"good": [
+			"night",
+			"bye"
 		],
-		"traffic": [
-			"stop"
+		"high": [
+			"school",
+			"horse",
+			"road",
+			"brow"
 		],
-		"master": [
-			"mind"
+		"sink": [
+			"hole"
 		],
-		"pool": [
-			"party",
-			"noodle"
+		"home": [
+			"work",
+			"town"
 		],
-		"belt": [
-			"buckle",
-			"loop"
+		"personal": [
+			"trainer"
 		],
-		"seat": [
-			"cushion"
+		"circle": [
+			"back",
+			"strafe"
 		],
-		"share": [
-			"crop"
+		"pecking": [
+			"order"
 		],
-		"copy": [
-			"cat"
+		"taste": [
+			"tester",
+			"test"
 		],
-		"body": [
-			"guard"
+		"day": [
+			"break",
+			"off",
+			"time"
 		],
-		"text": [
-			"book"
+		"pit": [
+			"stop",
+			"bull"
 		],
-		"heavy": [
-			"weight"
+		"world": [
+			"wide"
 		],
-		"plate": [
-			"metal"
-		],
-		"door": [
-			"knob"
-		],
-		"fly": [
-			"paper"
+		"wash": [
+			"up"
 		],
 		"eye": [
 			"witness"
 		],
-		"yard": [
-			"stick"
+		"news": [
+			"letter",
+			"paper",
+			"cast"
+		],
+		"court": [
+			"house"
+		],
+		"feel": [
+			"good"
+		],
+		"bathing": [
+			"suit"
+		],
+		"sauce": [
+			"pan"
+		],
+		"copy": [
+			"cat"
+		],
+		"tap": [
+			"dancer"
+		],
+		"sky": [
+			"blue",
+			"high"
+		],
+		"scatter": [
+			"brain"
+		],
+		"pick": [
+			"pocket",
+			"axe"
+		],
+		"motor": [
+			"oil"
+		],
+		"wire": [
+			"tap"
+		],
+		"cat": [
+			"walk"
+		],
+		"hand": [
+			"bag",
+			"written",
+			"basket"
+		],
+		"grave": [
+			"yard"
+		],
+		"pumping": [
+			"iron"
+		],
+		"sea": [
+			"shell"
+		],
+		"scented": [
+			"candle"
+		],
+		"pine": [
+			"scented"
+		],
+		"over": [
+			"coat",
+			"dressed"
+		],
+		"shoe": [
+			"box",
+			"lace"
+		],
+		"letter": [
+			"head"
 		]
 	}
 }
