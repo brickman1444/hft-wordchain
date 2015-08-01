@@ -127,18 +127,11 @@ requirejs(
   var wordChoiceButton = $("word-choice-button");
   var wordGuessForm = $("word-guess-form");
   
-  wordChoiceButton.addEventListener('click', inputSubmit, false);
+  wordChoiceButton.addEventListener('click', onInputSubmit, false);
   
-  if (wordInput.form) {
-    wordInput.form.addEventListener('submit', formSubmit, true);
-  }
+  wordInput.onkeypress=onKeyPress
   
-  function formSubmit()
-  {
-	  //alert("form submit")
-  }
-  
-  function inputSubmit()
+  function onInputSubmit()
   {
 	  //alert(wordInput.value)
       g_client.sendCmd('word choice', {
@@ -148,9 +141,19 @@ requirejs(
       enterButtonsMode();
   }
   
-  function inputChange()
+  function onKeyPress()
   {
-	  //alert("input change")
+      // 13 is the code for the enter button
+      // This somehow cancels the form submission event
+	  if (event.keyCode != 13)
+      {
+         return true;   
+      }
+      else
+      {
+         onInputSubmit()
+         return false;
+      }
   }
 
   var upButton = $("up-button");
@@ -203,6 +206,7 @@ requirejs(
         
   function unhideWordChoice() {
       unhideElement(wordGuessForm);
+      wordInput.focus();
   };
         
   function hideElement(element)
