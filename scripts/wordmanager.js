@@ -121,7 +121,7 @@ define( [
       
       function chooseNewList()
       {
-         var randomIndex = Misc.randInt( wordListLength );
+         var randomIndex = Misc.randInt( that.wordLists.length );
          var newWordList = that.wordLists[randomIndex];
           
          if ( newWordList != that.currentWordList )
