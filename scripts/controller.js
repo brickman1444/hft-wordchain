@@ -206,6 +206,7 @@ requirejs(
         
   function unhideWordChoice() {
       unhideElement(wordGuessForm);
+      wordInput.focus();
   };
         
   function hideElement(element)
