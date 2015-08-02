@@ -12,9 +12,6 @@ chainLength = 6
 
 def appendWordsToChain(partialChain, retList, shortList, pairDictionary):
 
-	if partialChain is None:
-		return
-
 	lastWord = partialChain[-1]
 
 	if lastWord not in pairDictionary:
