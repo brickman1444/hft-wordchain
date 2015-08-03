@@ -126,6 +126,7 @@ html, body {
   -webkit-align-content: center;
   -webkit-align-items: center;
   z-index: 4;
+  visibility: hidden;
 }
 
 #overlay-inner {
