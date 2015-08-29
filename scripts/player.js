@@ -34,14 +34,12 @@ define([
     'hft/misc/misc',
     'hft/misc/strings',
     '../bower_components/hft-utils/dist/2d',
-    '../bower_components/hft-utils/dist/imageutils',
-    './popupmanager'
+    '../bower_components/hft-utils/dist/imageutils'
   ], function(
     Misc,
     Strings,
     M2D,
-    ImageUtils,
-    PopUpManager) {
+    ImageUtils) {
 
   var availableColors = [];
   var nameFontOptions = {
@@ -51,10 +49,6 @@ define([
     fillStyle: "black",
   };
 
-  /**
-   * Player represnt a player in the game.
-   * @constructor
-   */
   var Player = (function() {
     return function(services, name, netPlayer) {
       this.services = services;

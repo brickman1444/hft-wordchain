@@ -11,6 +11,8 @@ function Hide(popupManager)
     popupManager.HidePopup();
 }
 
+var popUpDuration = 10000;
+
 define( [
         ],
        function (
@@ -32,7 +34,7 @@ define( [
     this.line1.childNodes[0].data = line1;
     this.line2.childNodes[0].data = line2;
     this.ShowPopUp();
-    setTimeout( Hide, 3000, this );
+    setTimeout( Hide, popUpDuration, this );
   }
     
   PopUpManager.prototype.ShowPopUp = function()
