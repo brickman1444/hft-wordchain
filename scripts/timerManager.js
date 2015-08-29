@@ -14,7 +14,7 @@ define( [],
        function (
                  ) {
     
-  var turnTime = 20;
+  var turnTime = 30;
     
   var TimerManager = function (services) {
     this.services = services;

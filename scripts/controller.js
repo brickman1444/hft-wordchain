@@ -222,6 +222,7 @@ requirejs(
   var handleStartTurn = function() {
       enterButtonsMode();
       g_audioManager.playSound("coin");
+      window.navigator.vibrate(100);
   };
         
   var handleEndTurn = function() {
