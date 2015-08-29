@@ -52,6 +52,11 @@ define(['./player'], function(Player) {
         player.endTurn();      
     }
       
+    if (this.players.length == 2)
+    {
+      this.services.timerManager.startTimer();   
+    }
+      
     return player;
   };
 
@@ -75,8 +80,13 @@ define(['./player'], function(Player) {
             }            
         }
           
-        return;
+        break;
       }
+    }
+      
+    if (this.players.length < 2)
+    {
+      this.services.timerManager.stopTimer();
     }
   };
 
@@ -90,15 +100,23 @@ define(['./player'], function(Player) {
     
   PlayerManager.prototype.advanceTurn = function(callback) {
     
-      this.currentTurnPlayer.endTurn();
-      
-      this.currentTurnPlayerIndex++;
-      
-      this.currentTurnPlayerIndex %= this.players.length;
-      
-      this.currentTurnPlayer = this.players[this.currentTurnPlayerIndex];
-      
-      this.currentTurnPlayer.startTurn();
+      if (this.currentTurnPlayer)
+      {
+          if (this.players.length >= 2)
+          {
+                this.services.timerManager.resetTimer();   
+          }
+          
+          this.currentTurnPlayer.endTurn();
+
+          this.currentTurnPlayerIndex++;
+
+          this.currentTurnPlayerIndex %= this.players.length;
+
+          this.currentTurnPlayer = this.players[this.currentTurnPlayerIndex];
+
+          this.currentTurnPlayer.startTurn();
+      }
   };
 
   return PlayerManager;

@@ -144,3 +144,20 @@ html, body {
   overflow: hidden;
 }
 
+#timer {
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
+  -webkit-align-items: center;
+  z-index: 4;
+  color: white;
+  font-size: 60px;
+}
+

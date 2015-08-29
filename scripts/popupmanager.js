@@ -32,8 +32,8 @@ define( [
     
   PopUpManager.prototype.CreatePopUp = function(line1, line2)
   {
-    this.line1.childNodes[0].data = line1;
-    this.line2.childNodes[0].data = line2;
+    this.line1.textContent = line1;
+    this.line2.textContent = line2;
     this.ShowPopUp();
     clearTimeout( this.hideTimeoutID );
     this.hideTimeoutID = setTimeout( Hide, popUpDuration, this );

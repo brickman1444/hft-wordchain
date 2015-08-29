@@ -55,6 +55,7 @@ requirejs(
     './scoremanager',
     './wordmanager',
     './popupmanager',
+   './timermanager',
   ], function(
     GameServer,
     GameSupport,
@@ -74,7 +75,8 @@ requirejs(
     PlayerManager,
     ScoreManager,
     WordManager,
-    PopUpManager) {
+    PopUpManager,
+    TimerManager) {
   var g_debug = false;
   var g_services = {};
 window.s = g_services;
@@ -203,6 +205,8 @@ window.g = globals;
     g_services.wordManager = g_wordManager;
     var g_popUpManager = new PopUpManager(g_services);
     g_services.popUpManager = g_popUpManager;
+    var g_timerManager = new TimerManager(g_services);
+    g_services.timerManager = g_timerManager;
       
     var resetGame = function() {
       g_services.playerManager.forEachPlayer(function(player) {
