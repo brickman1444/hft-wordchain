@@ -11,7 +11,7 @@ function Hide(popupManager)
     popupManager.HidePopup();
 }
 
-var popUpDuration = 10000;
+var popUpDuration = 3000;
 
 define( [
         ],
@@ -21,6 +21,7 @@ define( [
 
   var PopUpManager = function (services) {
     this.services = services;
+      this.hideTimeoutID = 0;
       
       this.overlay = $("overlay");
       this.line1 = $("overlay-line1");
@@ -34,7 +35,8 @@ define( [
     this.line1.childNodes[0].data = line1;
     this.line2.childNodes[0].data = line2;
     this.ShowPopUp();
-    setTimeout( Hide, popUpDuration, this );
+    clearTimeout( this.hideTimeoutID );
+    this.hideTimeoutID = setTimeout( Hide, popUpDuration, this );
   }
     
   PopUpManager.prototype.ShowPopUp = function()
