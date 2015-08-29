@@ -34,7 +34,7 @@ define([
     'hft/misc/misc',
     'hft/misc/strings',
     '../bower_components/hft-utils/dist/2d',
-    '../bower_components/hft-utils/dist/imageutils',
+    '../bower_components/hft-utils/dist/imageutils'
   ], function(
     Misc,
     Strings,
@@ -49,10 +49,6 @@ define([
     fillStyle: "black",
   };
 
-  /**
-   * Player represnt a player in the game.
-   * @constructor
-   */
   var Player = (function() {
     return function(services, name, netPlayer) {
       this.services = services;
@@ -130,8 +126,14 @@ define([
     
     if ( this.services.wordManager.checkWord( msg.word ) )
     {
-        this.addPoints( this.services.wordManager.getNumBlanks() );
+        var points = this.services.wordManager.getNumBlanks();
+        this.addPoints( points );
+        this.services.popUpManager.CreatePopUp('Correct! ' + points + " points",msg.word.toUpperCase())
         this.services.wordManager.advanceWordIndex();
+    }
+    else
+    {
+        this.services.popUpManager.CreatePopUp('Incorrect',msg.word.toUpperCase())  
     }
       
     this.services.playerManager.advanceTurn();

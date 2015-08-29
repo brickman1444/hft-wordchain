@@ -54,6 +54,7 @@ requirejs(
     './playermanager',
     './scoremanager',
     './wordmanager',
+    './popupmanager',
   ], function(
     GameServer,
     GameSupport,
@@ -72,7 +73,8 @@ requirejs(
     ParticleSystemManager,
     PlayerManager,
     ScoreManager,
-    WordManager) {
+    WordManager,
+    PopUpManager) {
   var g_debug = false;
   var g_services = {};
 window.s = g_services;
@@ -199,7 +201,9 @@ window.g = globals;
       
     var g_wordManager = new WordManager(g_services);
     g_services.wordManager = g_wordManager;
-
+    var g_popUpManager = new PopUpManager(g_services);
+    g_services.popUpManager = g_popUpManager;
+      
     var resetGame = function() {
       g_services.playerManager.forEachPlayer(function(player) {
         player.reset();

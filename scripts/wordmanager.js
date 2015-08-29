@@ -53,6 +53,7 @@ define( [
   var wordListURL = "assets/wordLists.json";
     
   var wordListLength = 6;
+  var chainFinishingPoints = 5;
     
   var WordManager = function (services) {
     this.services = services;
@@ -227,6 +228,8 @@ define( [
   
   WordManager.prototype.advanceWordIndex = function()
   {
+    var numBlanks = this.getNumBlanks();
+      
     if ( this.isTop )
     {
         this.currentTopWordIndex++;
@@ -242,7 +245,14 @@ define( [
       
     if ( this.currentBottomWordIndex < this.currentTopWordIndex )
     {
-        this.randomizeWordList();   
+        this.randomizeWordList();
+        var player = this.services.playerManager.currentTurnPlayer;
+        if (player)
+        {
+            player.addPoints(chainFinishingPoints);
+            this.services.popUpManager.CreatePopUp( player.playerName + " finished the chain!", 
+                                                   numBlanks + " points + " + chainFinishingPoints + " bonus points");   
+        }
     }
      
     this.setWordSprites();
