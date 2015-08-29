@@ -5,6 +5,12 @@ function $(id) {
   return document.getElementById(id);
 }
 
+// This is here because setTimeout() doesn't seem to call member functions correctly
+function Hide(popupManager)
+{
+    popupManager.HidePopup();
+}
+
 define( [
         ],
        function (
@@ -19,9 +25,15 @@ define( [
       this.line2 = $("overlay-line2");
       
       this.HidePopup();
-      
-      setTimeout( this.ShowPopUp, 3000 );
   };
+    
+  PopUpManager.prototype.CreatePopUp = function(line1, line2)
+  {
+    this.line1.childNodes[0].data = line1;
+    this.line2.childNodes[0].data = line2;
+    this.ShowPopUp();
+    setTimeout( Hide, 3000, this );
+  }
     
   PopUpManager.prototype.ShowPopUp = function()
   {
@@ -31,11 +43,6 @@ define( [
   PopUpManager.prototype.HidePopup = function()
   {
     this.overlay.style.visibility = 'hidden';
-  }
-    
-  PopUpManager.prototype.func = function()
-  {
-     
   }
 
   return PopUpManager;

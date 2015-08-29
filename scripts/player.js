@@ -35,11 +35,13 @@ define([
     'hft/misc/strings',
     '../bower_components/hft-utils/dist/2d',
     '../bower_components/hft-utils/dist/imageutils',
+    './popupmanager'
   ], function(
     Misc,
     Strings,
     M2D,
-    ImageUtils) {
+    ImageUtils,
+    PopUpManager) {
 
   var availableColors = [];
   var nameFontOptions = {
@@ -130,8 +132,14 @@ define([
     
     if ( this.services.wordManager.checkWord( msg.word ) )
     {
-        this.addPoints( this.services.wordManager.getNumBlanks() );
+        var points = this.services.wordManager.getNumBlanks();
+        this.addPoints( points );
+        this.services.popUpManager.CreatePopUp('Correct! ' + points + " points",msg.word.toUpperCase())
         this.services.wordManager.advanceWordIndex();
+    }
+    else
+    {
+        this.services.popUpManager.CreatePopUp('Incorrect',msg.word.toUpperCase())  
     }
       
     this.services.playerManager.advanceTurn();
